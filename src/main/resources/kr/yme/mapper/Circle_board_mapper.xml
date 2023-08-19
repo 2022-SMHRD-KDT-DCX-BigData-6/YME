@@ -3,7 +3,7 @@
 <mapper namespace="kr.yme.mapper.Circle_board_mapper">
 	
 	<select id="c_rank" resultType="int">
-		select circle_seq from Circle_join group by circle_seq order by count(*) desc
+		select circle_seq from Circle_join group by circle_seq order by count(*) desc limit 3
 	</select>
 	
 	<select id="rank_data" parameterType="int" resultType="kr.yme.entity.Circle">

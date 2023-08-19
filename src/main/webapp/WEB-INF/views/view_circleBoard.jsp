@@ -291,7 +291,7 @@
 							</div>
 						</div>
 
-
+						<c:if test="${!mvo.circle_at eq circle_detail.circle_name}">
 						<!--모닥불, 가입 버튼, 출첵-->
 						<div class="content"
 							style="display: flex; justify-content: space-between; margin: 0 20px; border-bottom: 1px solid #F5F5F5; padding-bottom: 25px;">
@@ -318,6 +318,8 @@
 
 							</div>
 						</div>
+						</c:if>
+						
 						<!--동아리 정보 3( 동아리 소속 대학교, 동아리 종류, 한 줄 소개, 공지사항, 동아리 해시태그)-->
 						<div class="content" style="padding-top: 25px;">
 							<div
