@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.Circle_board_mapper">
+	
+	<select id="c_rank" resultType="int">
+		select circle_seq from Circle_join group by circle_seq order by count(*) desc
+	</select>
+	
+	<select id="rank_data" parameterType="int" resultType="kr.yme.entity.Circle">
+		SELECT * FROM Circle as c INNER JOIN Univ_region as u  ON c.circle_univ = u.univ where c.circle_seq =#{circle_seq}
+	</select>
+	
+	<select id="sel_c_seq" parameterType="String" resultType="int">
+		select circle_seq from Circle where circle_name = #{circle_at}
+	</select>
+	
+	<select id="selectDetail" parameterType="int" resultType="kr.yme.entity.Circle">
+		select * from Circle where circle_seq = #{circle_seq}
+	</select>	
+	
+	<select id="selectName" parameterType="int" resultType="kr.yme.entity.Member">
+		select Circle.id, Member.name FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = #{circle_seq}
+	</select>	
+
+	<select id="selectBoard" parameterType="int" resultType="kr.yme.entity.Circle_board">
+		SELECT * FROM Circle_board cb JOIN Member m ON cb.id = m.id WHERE circle_seq = #{circle_seq}
+	</select>	
+	<select id="sel_c_member" parameterType="kr.yme.entity.Member" resultType="int">
+		select count(*) from Circle_join where id = #{id}
+	</select>
+	
+	
+	<select id="selectAdetail" resultType="kr.yme.entity.Circle_board" parameterType="int">
+		select * from Circle_board Where board_seq = #{board_seq}
+	</select>
+	
+	<select id="selectAname"  resultType="kr.yme.entity.Member">
+		<!-- select Circle.id, Member.name FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = 1 -->
+		select Circle.id, Member.nick FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = 1
+	</select>
+	
+	
+	 <select id="selectTdetail" resultType="kr.yme.entity.Circle_board" parameterType="int">
+		select * from Circle_board Where board_seq = #{board_seq}
+	</select>
+	
+	<insert id="insertBoard" parameterType="kr.yme.entity.Circle_board">
+		insert into Circle_board(circle_seq, id, board_title, board_content, board_type, board_at)
+values( 3, '1234', #{board_title}, #{board_content}, #{board_type}, now() )
+	</insert>
+	
+	<insert id="insertImageBoard" parameterType="kr.yme.entity.Circle_board">
+		insert into Circle_board(circle_seq, id, board_title, board_content, board_img, board_type, board_at)
+values( 3, #{id}, #{board_title}, #{board_content}, #{board_img}, #{board_type}, now() )
+	</insert>
+	
+	<update id="addHit" parameterType="int">
+		update Circle_board set count = count+1 where board_seq = #{board_seq}
+	</update>
+	
+	<!-- 게시글 좋아요 -->
+	<update id="recommendReply" parameterType="int">
+		update Circle_board set likes = likes+1  where board_seq=#{board_seq}
+	</update>
+
+	
+</mapper>

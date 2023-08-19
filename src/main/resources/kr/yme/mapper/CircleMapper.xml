@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.CircleMapper">
+
+	<select id="s_circleSearch" parameterType="kr.yme.entity.Circle" resultType="kr.yme.entity.Circle">
+		select * 
+		from Circle, Univ_region 
+		where Circle.circle_univ = Univ_region.univ 
+		and Univ_region.u_name 
+		like CONCAT("%",#{circle_univ},"%")		
+	</select>	
+	
+	<select id="c_circleSearch" parameterType="kr.yme.entity.Circle" resultType="kr.yme.entity.Circle">
+		select * 
+		from Circle, Univ_region 
+		where Circle.circle_univ = Univ_region.univ
+		and Circle.circle_name 
+		like CONCAT("%",#{circle_name},"%")		
+	</select>
+</mapper>
+

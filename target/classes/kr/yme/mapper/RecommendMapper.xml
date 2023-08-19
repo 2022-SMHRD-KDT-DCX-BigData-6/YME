@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.RecommendMapper">
+	<select id="selTendency" parameterType="kr.yme.entity.Member" resultType="kr.yme.entity.Tendency">
+		select * from Tendency where id=#{id}
+	</select>
+	
+	<select id="recoCircle2" parameterType="kr.yme.entity.Tendency" resultType="kr.yme.entity.Circle">
+		select * from Circle where circle_category=#{tendency_2} and circle_univ=#{univ} limit 2
+	</select>
+	<select id="recoCircle1" parameterType="kr.yme.entity.Tendency" resultType="kr.yme.entity.Circle">
+		select * from Circle where circle_category=#{tendency_1} and circle_univ=#{univ} limit 2
+	</select>
+	<select id="recoCircle3" parameterType="kr.yme.entity.Tendency" resultType="kr.yme.entity.Circle">
+		select * from Circle where circle_category=#{tendency_3} and circle_univ=#{univ} limit 2
+	</select>
+	
+	<select id="chk_Tendency" parameterType="String" resultType="int">
+		select count(*) from Tendency where id = #{id}
+	</select>
+	
+</mapper>

@@ -19,6 +19,13 @@ CREATE TABLE t_member
      PRIMARY KEY (id)
 );
 
+select * from t_member;
+
+insert into t_member values('test01','1234','테스트','테스트','010-1111-1111','SMHRD','smhrd','#내향,#집콕','광주','ISTP','2000-05-30',now());
+insert into t_member values('test02','1234','테스트2','테스트2','010-2222-2222','SMHRD','smhrd','#외향,#집콕','담양','ESTP','1999-06-30',now());
+
+
+
 -- 테이블 Comment 설정 SQL - t_member
 ALTER TABLE t_member COMMENT '회원. 회원';
 

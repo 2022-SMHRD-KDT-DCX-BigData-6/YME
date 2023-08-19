@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.MemberMapper">
+	<insert id="insertMember" parameterType="kr.yme.entity.Member">
+		insert into Member(id,pw,name,nick,phone,univ,circle_at,preference,region,mbti,birthdate,created_at) values(#{id},#{pw},#{name},#{nick},#{phone},#{univ},#{circle_at},#{preference},#{region},#{mbti},#{birthdate},now())
+	</insert>
+	
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(*) from Member where id=#{id}
+	</select>
+	
+	<select id="checkNick" parameterType="String" resultType="int">
+		select count(*) from Member where nick=#{nick}
+	</select>
+	<select id="searchFriend" parameterType="kr.yme.entity.Member" resultType="kr.yme.entity.Member">
+		select M_character.ani_name, Member.id, Member.nick, Member.preference
+		from M_character, Member 
+		where M_character.id = Member.id
+		and M_character.ani_name = #{ani_name} and Member.mbti = #{mbti} and Member.univ = #{univ};
+		
+	</select>
+</mapper>
+

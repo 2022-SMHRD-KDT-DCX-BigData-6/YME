@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.LoginMapper">
+	<select id="login" parameterType="kr.yme.entity.Member" resultType="kr.yme.entity.Member">
+		SELECT * FROM Member as m INNER JOIN Univ_region as u ON m.univ = u.univ where m.id = #{id} and m.pw = #{pw}
+	</select>
+	
+	<select id="ajaxLogin" parameterType="kr.yme.entity.Member" resultType="int">
+		select count(*) from Member where id =#{id} and pw=#{pw}
+	</select>
+</mapper>
+
