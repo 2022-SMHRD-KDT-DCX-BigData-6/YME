@@ -121,47 +121,52 @@
 					</ul>
 				</div>
 
-				<div class="dropdown px-3">
-					<a class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> <img
-						src="./resources/images/medium-shot-happy-man-smiling.jpg"
-						class="profile-image img-fluid" alt="">
-					</a>
-					<ul class="dropdown-menu bg-white shadow">
-						<li>
-							<div class="dropdown-menu-profile-thumb d-flex">
-								<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
-									class="profile-image img-fluid me-3" alt="">
+					<div class="dropdown px-3">
+						<a class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
+							class="profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+						</a>
+						<ul class="dropdown-menu bg-white shadow">
+							<li>
+								<div class="dropdown-menu-profile-thumb d-flex">
+								<c:if test="${mc_vo eq 'x' }">
+									<img src="./resources/images/icons/i_noProfile.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+								<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 
-								<div class="d-flex flex-column">
-									<small>Thomas</small> <a href="#">thomas@site.com</a>
+									<div class="d-flex flex-column">
+										<small>${mvo.nick}</small>
+									</div>
 								</div>
-							</div>
-						</li>
+							</li>
 
-						<li><a class="dropdown-item" href="profile.html"> <i
-								class="bi-person me-2"></i> Profile
-						</a></li>
+							<li><a class="dropdown-item" href="${cpath}/myPage.do">
+									<i class="bi-person me-2"></i> Profile
+							</a></li>
 
-						<li><a class="dropdown-item" href="setting.html"> <i
-								class="bi-gear me-2"></i> Settings
-						</a></li>
-
-						<li><a class="dropdown-item" href="help-center.html"> <i
-								class="bi-question-circle me-2"></i> Help
-						</a></li>
-
-						<li class="border-top mt-3 pt-2 mx-4"><a
-							class="dropdown-item ms-0 me-0" href="#"> <i
-								class="bi-box-arrow-left me-2"></i> Logout
-						</a></li>
-					</ul>
-				</div>
+							<li class="border-top mt-3 pt-2 mx-4"><a
+								class="dropdown-item ms-0 me-0" href="${cpath }/logout.do"> <i
+									class="bi-box-arrow-left me-2"></i> Logout
+							</a></li>
+						</ul>
+					</div>
 			</div>
 		</div>
 	</header>
 
-	<form action="http://127.0.0.1/tospring" method="get" id="frm">
+	<form action="http://127.0.0.1/toResearch" method="get" id="frm">
 		<div class="swiper-container"
 			style="background: var(- -section-bg-color); min-height: calc(100vh - 65px);">
 			<div id="prevButton" class="swiper-button-prev"></div>

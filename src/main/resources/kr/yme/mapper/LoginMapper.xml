@@ -8,5 +8,9 @@
 	<select id="ajaxLogin" parameterType="kr.yme.entity.Member" resultType="int">
 		select count(*) from Member where id =#{id} and pw=#{pw}
 	</select>
+	
+	<select id="getProfile" parameterType="String" resultType="kr.yme.entity.M_character">
+		select * from M_character where id =#{id}
+	</select>
 </mapper>
 

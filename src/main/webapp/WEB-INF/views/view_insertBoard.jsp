@@ -255,34 +255,39 @@
 						</ul>
 					</div>
 
-					<div class="dropdown px-3">
+						<div class="dropdown px-3">
 						<a class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img
-							src="./resources/images/medium-shot-happy-man-smiling.jpg"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
 							class="profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 						</a>
 						<ul class="dropdown-menu bg-white shadow">
 							<li>
 								<div class="dropdown-menu-profile-thumb d-flex">
-									<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
+								<c:if test="${mc_vo eq 'x' }">
+									<img src="./resources/images/icons/i_noProfile.png"
 										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+								<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 
 									<div class="d-flex flex-column">
-										<small>Thomas</small> <a href="#">thomas@site.com</a>
+										<small>${mvo.nick}</small>
 									</div>
 								</div>
 							</li>
 
-							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+							<li><a class="dropdown-item" href="${cpath}/myPage.do">
 									<i class="bi-person me-2"></i> Profile
-							</a></li>
-
-							<li><a class="dropdown-item" href="setting.html"> <i
-									class="bi-gear me-2"></i> Settings
-							</a></li>
-
-							<li><a class="dropdown-item" href="help-center.html"> <i
-									class="bi-question-circle me-2"></i> Help
 							</a></li>
 
 							<li class="border-top mt-3 pt-2 mx-4"><a
@@ -298,10 +303,10 @@
 	<div class="container-fluid">
 		<div class="row">
 				<nav id="sidebarMenu"
-				class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="${cpath}/main.do"> <i
 								class="bi-house-fill me-2"></i> 메인
 						</a></li>
@@ -310,7 +315,7 @@
 								<i class="bi-wallet me-2"></i> 동아리 찾기
 						</a></li>
 						<c:if test="${!empty mvo}">
-						<li class="nav-item"><a class="nav-link" href="javascript:void(0);" onclick="my_circle()">
+						<li class="nav-item"><a class="nav-link active" href="javascript:void(0);" onclick="my_circle()">
 								<i class="bi-person me-2"></i> 내 동아리</a>
 								<ul style="display: none" id="my_circle">
 									<li class="nav-item" style="list-style-type: none">
@@ -359,7 +364,7 @@
 				</div>
 			</nav>
 			<main
-				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-10 px-md-4 border-start">
 				<div
 					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
 					style="padding: 0;">
@@ -408,19 +413,7 @@
 									</div>
 
 									
-<!-- 								<input type="hidden" id="route" name="board_img" value="">
-									
-									<div class="submit_btn"
-										style="display: flex; position: relative;" id="add">
-										<div class="footer_btn 7_a_btn btn_title w-30 none"
-											onclick="history.back()"
-											style="background: #EBEBEB; color: #222222;">이전</div>
-										<button type="button"
-											class="footer_btn 7_b_btn btn_title w-70 write_check none" onclick="submitfrm()">게시글
-											등록</button>
-									</div> -->
-									
-									<!-- HTML form 내부에 파일 입력 필드를 추가 -->
+						<!-- HTML form 내부에 파일 입력 필드를 추가 -->
 									<div class="input-group" style="display:none">
 									<input type="file" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="board_img" style="padding-right:36%; width:48%;margin-right:52%; margin-bottom:1%" />
 									</div>
@@ -506,6 +499,21 @@
 			$(".input-group").css("display","none");
 			$("#frm").submit();
 						
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function login() {
+			
+			var id = $('#id').val();
+			var pw = $('#pw').val();
+			
+			if(id !=""&& pw !=""){
+				document.getElementById('lfrm').submit();
+			}else{
+				
+				alert("아이디 비밀번호를 확인해 주세요!");
+			}
 		}
 	</script>
 </body>

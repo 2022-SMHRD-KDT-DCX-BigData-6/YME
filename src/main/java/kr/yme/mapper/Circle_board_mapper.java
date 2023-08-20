@@ -6,11 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.yme.entity.Circle;
 import kr.yme.entity.Circle_board;
+import kr.yme.entity.Circle_join;
 import kr.yme.entity.Member;
 
 @Mapper
 public interface Circle_board_mapper {
-
+	public void joinCircle(Circle_join cjvo);
 	public Circle selectDetail(int circle_seq);
 	public Member selectName(int circle_seq);
 	public List<Circle_board> select_A_Board(int circle_seq);
@@ -32,7 +33,7 @@ public interface Circle_board_mapper {
 	public Circle rank_data(int circle_seq);
 	
 	//게시글 좋아요 메서드
-		public void recommendReply(int boardSeq);
+		public void recommendReply(int board_seq);
 		
 		public void addHit(int board_seq);
 		

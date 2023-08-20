@@ -1568,34 +1568,40 @@
 						</ul>
 					</div>
 
-					<div class="dropdown px-3">
+				
+							<div class="dropdown px-3">
 						<a class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img
-							src="./resources/images/medium-shot-happy-man-smiling.jpg"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
 							class="profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 						</a>
 						<ul class="dropdown-menu bg-white shadow">
 							<li>
 								<div class="dropdown-menu-profile-thumb d-flex">
-									<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
+								<c:if test="${mc_vo eq 'x' }">
+									<img src="./resources/images/icons/i_noProfile.png"
 										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+								<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 
 									<div class="d-flex flex-column">
-										<small>Thomas</small> <a href="#">thomas@site.com</a>
+										<small>${mvo.nick}</small>
 									</div>
 								</div>
 							</li>
 
-							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+							<li><a class="dropdown-item" href="${cpath}/myPage.do">
 									<i class="bi-person me-2"></i> Profile
-							</a></li>
-
-							<li><a class="dropdown-item" href="setting.html"> <i
-									class="bi-gear me-2"></i> Settings
-							</a></li>
-
-							<li><a class="dropdown-item" href="help-center.html"> <i
-									class="bi-question-circle me-2"></i> Help
 							</a></li>
 
 							<li class="border-top mt-3 pt-2 mx-4"><a
@@ -1615,7 +1621,7 @@
 				class="col-md-3 col-lg-3 d-md-block sidebar collapse">
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="${cpath}/main.do"> <i
 								class="bi-house-fill me-2"></i> 메인
 						</a></li>
@@ -1624,7 +1630,7 @@
 								<i class="bi-wallet me-2"></i> 동아리 찾기
 						</a></li>
 						<c:if test="${!empty mvo}">
-						<li class="nav-item"><a class="nav-link" href="javascript:void(0);" onclick="my_circle()">
+						<li class="nav-item"><a class="nav-link active" href="javascript:void(0);" onclick="my_circle()">
 								<i class="bi-person me-2"></i> 내 동아리</a>
 								<ul style="display: none" id="my_circle">
 									<li class="nav-item" style="list-style-type: none">
@@ -1697,19 +1703,14 @@
 
 									
 									<!--동아리 홈 이동-->
-									<div
-										onclick="show_loader();location.href='${cpath}/c_board.do'"
-										class="top_icon_home fw400_12_14_3A">동아리 홈</div>
-									<div style="display: flex;">
-
-									</div>
+									
 								</div>
 								<div>
 
 									<div class="title"
 										style="display: flex; align-items: center; justify-content: space-between;">
-										<div>${detail_text.board_title}</div>
-										<!-- 여기 값 안넣으면 이 값 제외하고 출려되는데 넣으면 오류뜸.. 창이 안열린다. 모르겠다.. -->
+										<div>${detail_text.board_title} </div>
+									<small>조회수 ${detail_text.count}</small>
 									</div>
 
 								</div>
@@ -1730,7 +1731,7 @@
 											<div onclick="show_loader();location.href='/web/user/26224'"
 												style="display: inline-block">
 												<div class="user_name"
-													style="display: flex; align-items: center;">${detail_name.name}</div>
+													style="display: flex; align-items: center;">${detail_name.id}</div>
 											</div>
 
 
@@ -1759,16 +1760,16 @@
 									onclick="likeBoard(${detail_text.board_seq})"></div>
 								<div id="like_cnt"
 									style="font-weight: 300; font-size: 12px; line-height: 14px; text-align: center; letter-spacing: -0.02em; color: #8E8E8E;">
-									11</div>
+									${detail_text.likes}</div>
 							</div>
 
 						</div>
 
 
-						<div class="reply_box" id="reply_box" style="">
+						<div class="reply_box" id="reply_box" style="padding-bottom: 2px">
 							<div class="comment_item f-15"
 								style="width: 830px; height: 38px; text-align: left;">
-								<span class="color-mc">${replies.size()}</span>
+								댓글<span class="color-mc">${replies.size()}</span>
 							</div>
 							<c:forEach items="${replies}" var="reply">
 							<div class="comment_item" id="comment_14266">
@@ -1779,25 +1780,20 @@
 											<div class="c_col_01" id="reply_01_14266"
 												style="margin-right: 10px;">
 												<img data-id="14266" class="user_thumb"
-													src="https://mycampus-storage.s3.ap-northeast-2.amazonaws.com/s/shared/temporary/2023/06/17/bc4444ac-94d2-45cb-8542-123d137e76c9.jpeg"
+													src="./resources/images/icons/i_noProfile.png"
 													width="35" height="35">
 											</div>
 											<div class="reply_right_div">
-												<button style="
-												    float: right;
-												    position: absolute;
-												    right: 10px;
-												"
-												onclick="removeReply(${detail_text.board_seq}, ${reply.reply_seq})"
-												>임시삭제 버튼
-												</button>
+										<img alt="x" src="./resources/images/i_del.png" 
+													style="width: 30px; height: 30px;float: right; position: absolute; right: 30px;"
+													onclick="removeReply(${detail_text.board_seq}, ${reply.reply_seq})">
 												<div class="c_col_02" style="line-height: 1;">
 													<div id="reply_02_14266">
 														<span class="rw"
 															style="display: flex; align-items: center;"> <span
 															class="fw600_13_16_3A"
 															onclick="show_loader();location.href='/web/user/26146'"
-															style="display: flex; align-items: center; font-weight: 700;">${reply.reply_id}
+															style="display: flex; align-items: center; font-weight: 700;">${reply.nick}
 														</span>
 														</span> <span class="rc"
 															style="white-space: break-spaces; word-break: break-word; text-align: left;">${reply.reply_content}</span>
@@ -1817,8 +1813,8 @@
 												style="display: flex; flex-direction: row; align-items: center;">
 												<span
 													style="display: flex; flex-direction: row; align-items: center; margin-right: 20px;">
-													<span class="c_col_03" id="reply_03_14266"> <span
-														href="#" onclick="`his)" data-index="14266" data-like="0"
+													<span class="c_col_03" id="reply_03_14266"> 
+													<span data-index="14266" data-like="0"
 														class="heart"
 														style="padding-left: 13px; margin-right: 5px; margin-bottom: 0;"></span>
 												</span> <span class="fw400_12_14_8E r_cnt" id="14266_like_cnt">${reply.likes}</span>
@@ -1844,18 +1840,17 @@
 							<div class="total_div" style="flex-direction: row;">
 								<div class="reply_div" style="width: calc(100% - 0px);">
 
-									<form action="${cpath}/c_reply.do" method="post">
+									<form action="${cpath}/c_treply.do" method="post">
 
 										<input type="hidden" name="id" value="${detail_text.id}" />
 											<input type="hidden" name="reply_id" value="${mvo.id}"/>
 										<input type="hidden" name="r_group" value="${detail_text.board_seq}" />
-
-
-										<div class="input-group">
-  											<span class="input-group-text">Reply</span>
-  											<textarea class="form-control" aria-label="With textarea"></textarea>
-  											<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-										</div>
+										<input type="hidden" name="circle_seq" value="${detail_album.circle_seq }">
+<div class="reply_input_tbl">
+  <input type="text" class="form-control" placeholder="댓글 입력" aria-label="Recipient's username" name="reply_content" aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>
+</div>
+										
 
 									</form>
 
@@ -1884,22 +1879,20 @@
 		<script type="text/javascript">
 			function likeReply(boardNo, replyNo) {
 				if(confirm('이 댓글을 좋아요 하시겠습니까?')) {
-					location.replace("${cpath}/c_like_reply.do?boardSeq="+boardNo+"&rSeq="+replyNo)
+					location.replace("${cpath}/c_like_Treply.do?circle_seq="+${detail_text.circle_seq}+"&board_seq="+boardNo+"&r_seq="+replyNo)
 				}
 			}
 			
 
 			function likeBoard(no) {
 
-				if(confirm('이 글을 좋아요 하시겠습니까? (임시)')) {
-					//location.replace("${cpath}/c_like_board.do?boardSeq="+no)
-				}
+				location.replace("${cpath}/c_like_tboard.do?board_seq="+no+"&circle_seq="+${detail_text.circle_seq})
 			}
 			
 			function removeReply(boardNo, replyNo) {
 
 				if(confirm('댓글을 삭제 하시겠습니까?')) {
-					location.replace("${cpath}/c_remove_reply.do?boardSeq="+boardNo+"&rSeq="+replyNo)
+					location.replace("${cpath}/c_remove_Treply.do?board_seq="+boardNo+"&r_seq="+replyNo+"&circle_seq="+${detail_text.circle_seq})
 				}
 			}
 		</script>

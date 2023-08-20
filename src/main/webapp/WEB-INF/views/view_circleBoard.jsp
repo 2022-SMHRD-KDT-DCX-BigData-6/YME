@@ -155,38 +155,43 @@
 						</ul>
 					</div>
 
-					<div class="dropdown px-3">
+						<div class="dropdown px-3">
 						<a class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img
-							src="./resources/images/medium-shot-happy-man-smiling.jpg"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
 							class="profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 						</a>
 						<ul class="dropdown-menu bg-white shadow">
 							<li>
 								<div class="dropdown-menu-profile-thumb d-flex">
-									<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
+								<c:if test="${mc_vo eq 'x' }">
+									<img src="./resources/images/icons/i_noProfile.png"
 										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+								<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 
 									<div class="d-flex flex-column">
-										<small>Thomas</small> <a href="#">thomas@site.com</a>
+										<small>${mvo.nick}</small>
 									</div>
 								</div>
 							</li>
 
-							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+							<li><a class="dropdown-item" href="${cpath}/myPage.do">
 									<i class="bi-person me-2"></i> Profile
 							</a></li>
 
-							<li><a class="dropdown-item" href="setting.html"> <i
-									class="bi-gear me-2"></i> Settings
-							</a></li>
-
-							<li><a class="dropdown-item" href="help-center.html"> <i
-									class="bi-question-circle me-2"></i> Help
-							</a></li>
-
 							<li class="border-top mt-3 pt-2 mx-4"><a
-								class="dropdown-item ms-0 me-0" href="#"> <i
+								class="dropdown-item ms-0 me-0" href="${cpath }/logout.do"> <i
 									class="bi-box-arrow-left me-2"></i> Logout
 							</a></li>
 						</ul>
@@ -199,7 +204,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<nav id="sidebarMenu"
-				class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
 						<li class="nav-item"><a class="nav-link"
@@ -234,7 +239,7 @@
 						</c:if>
 						<c:if test="${!empty mvo}">
 							<li class="nav-item"><a class="nav-link"
-								href="#"> <i class="bi-person me-2"></i>
+								href="${cpath}/make_profile.do"> <i class="bi-person me-2"></i>
 									동물 프로필 만들기
 							</a></li>
 						</c:if>
@@ -261,7 +266,7 @@
 			</nav>
 
 			<main
-				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-10 px-md-4 border-start">
 				<div
 					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white">
 
@@ -305,7 +310,7 @@
 											
 											
 											<div
-												onclick="alert('대학교 인증이 필요합니다.');show_loader();location.href='/web/user/university'">
+												onclick="circlejoin()">
 												<div style="color: #FFFFFF; font-size: 16px;">가입</div>
 											</div>
 										
@@ -400,10 +405,42 @@
 								aria-live="polite"
 								style="height: 516px; transform: translate3d(-850px, 0px, 0px); transition-duration: 0ms;">
 
-
+							
 								<div class="swiper-slide" data-hash="1"
 									style="width: 840px; margin-right: 10px;" role="group"
 									aria-label="2 / 3">
+									<c:if test="${mvo.circle_at ne circle_detail.circle_name}">
+										<div
+										style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 30px 20px;">
+										<div class="board_main_title">활동 앨범</div>
+									</div>
+									<div class="row" style="margin: 0 20px;">
+										<c:if test="${empty circle_A_board}">
+											<h6>
+											<img alt="x" src="./resources/images/icons/i_board.png" style="width: 20%">
+											<span>아직 게시글이 없어요!</span> </h6>
+										</c:if>
+										<c:if test="${!empty circle_A_board}">
+										<form id="frm" action="${cpath}/c_Adetail.do" method="post">
+												<input type="hidden" id="board_seq" name="board_seq"
+													value="">
+													<input type="hidden" id="circle_seq" name ="circle_seq" value="">
+											<c:forEach var="vo" items="${circle_A_board}">
+												<div class="col-custom" >
+													<div class="square"
+														style="background-image: url('${vo.board_img}'); background-size: cover; background-position: center;"
+														onclick="alert('동아리 회원이 아닙니다')">
+														
+														</div>
+												</div>
+											</c:forEach>
+										</form>
+										</c:if>
+									</div>
+																		
+									
+									</c:if>
+									<c:if test="${mvo.circle_at eq circle_detail.circle_name}">
 									<div
 										style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 30px 20px;">
 										<div class="board_main_title">활동 앨범</div>
@@ -416,19 +453,22 @@
 										</c:if>
 										<c:if test="${!empty circle_A_board}">
 										<form id="frm" action="${cpath}/c_Adetail.do" method="post">
+												<input type="hidden" id="board_seq" name="board_seq"
+													value="">
+													<input type="hidden" id="circle_seq" name ="circle_seq" value="">
 											<c:forEach var="vo" items="${circle_A_board}">
-												<input type="hidden" name="board_seq"
-													value="${vo.board_seq}">
-													<input type="hidden" name ="circle_seq" value="${vo.circle_seq}">
 												<div class="col">
 													<div class="square"
 														style="background-image: url('${vo.board_img}'); background-size: cover; background-position: center;"
-														onclick="showAlbum()"></div>
+														onclick="showAlbum(this, ${vo.board_seq},${vo.circle_seq})">
+														
+														</div>
 												</div>
 											</c:forEach>
 										</form>
 										</c:if>
 									</div>
+									</c:if>
 								</div>
 
 
@@ -437,6 +477,8 @@
 								<div class="swiper-slide" data-hash="2"
 									style="width: 840px; margin-right: 10px; text-align: left;"
 									role="group" aria-label="3 / 3">
+									
+									
 									<div
 										style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 30px 20px;"
 										onclick="show_loader();location.href='/web/club/base_board/club_board/1655'">
@@ -448,12 +490,12 @@
 											<img alt="x" src="./resources/images/icons/i_board.png" style="width: 20%">
 											<span>아직 게시글이 없어요!</span> </h6>
 										</c:if>
-
-
+								<c:if test="${mvo.circle_at ne circle_detail.circle_name}">
 									<c:if test="${!empty circle_T_board}">
 									<form id="frm2" action="${cpath}/c_Tdetail.do" method="post">
+									
 										<c:forEach var="vo" items="${circle_T_board}">
-											<div onclick="showText(${vo.board_seq})">
+											<div onclick="alert('동아리 회원이 아닙니다')">
 											<div class="row"
 												style="margin: 0 20px; border-bottom: 1px solid #F5F5F5; padding-bottom: 25px; margin-bottom: 25px;"
 												>
@@ -472,7 +514,7 @@
 														<div
 															style="width: 20px; height: 20px; border: 1px solid #F5F5F5F5; border-radius: 8px; margin-right: 6px;">
 															<img class="user_img"
-																src="https://mycampus-storage.s3.ap-northeast-2.amazonaws.com/s/shared/temporary/2023/06/15/556fb59b-4fcb-4e3d-8e30-61dc99b111a1.jpg">
+																src="./resources/images/icons/i_noProfile.png">
 														</div>
 														<div class="club_board_name">${vo.nick}</div>
 													</div>
@@ -496,6 +538,53 @@
 										</div>
 										</c:forEach>
 									</form>
+									</c:if>
+								</c:if>
+								<c:if test="${mvo.circle_at eq circle_detail.circle_name}">
+									<c:if test="${!empty circle_T_board}">
+									<form id="frm2" action="${cpath}/c_Tdetail.do" method="post">
+									<input type="hidden" id="board_seq" name="board_seq"
+													value="">
+													<input type="hidden" id="circle_seq" name ="circle_seq" value="">
+										<c:forEach var="vo" items="${circle_T_board}">
+											<div onclick="showText(this,${vo.board_seq},${vo.circle_seq })">
+											<div class="row"
+												style="margin: 0 20px; border-bottom: 1px solid #F5F5F5; padding-bottom: 25px; margin-bottom: 25px;"
+												>
+												<div
+													style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+													<div
+														style="width: 95%; text-overflow: ellipsis; white-space: nowrap;">
+														<div class="club_board_title">${vo.board_title}</div>
+														<div class="club_board_content">${vo.board_content}</div>
+													</div>
+												</div>
+												<div
+													style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+													<div
+														style="display: flex; flex-direction: row; align-items: center;">
+														<div
+															style="width: 20px; height: 20px; border: 1px solid #F5F5F5F5; border-radius: 8px; margin-right: 6px;">
+															<img class="user_img"
+																src="./resources/images/icons/i_noProfile.png">
+														</div>
+														<div class="club_board_name">${vo.nick}</div>
+													</div>
+													<div
+														style="display: flex; flex-direction: row; align-items: center;">
+														<div class="club_board_name"
+															style="display: flex; flex-direction: row; align-items: center; margin-right: 10px;">
+															<img src="./resources/images/icons/i_hearts.png"
+																style="width: 15px; height: 15px; margin-right: 5px;">
+															${vo.likes}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										</c:forEach>
+									</form>
+									</c:if>
 									</c:if>
 								</div>
 							</div>
@@ -528,6 +617,13 @@
 	<script src="./resources/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/js/apexcharts.min.js"></script>
 	<script src="./resources/js/custom.js"></script>
+	
+	<script type="text/javascript">
+		function circlejoin(){
+			alert("심사후 가입이 승인 됩니다.");
+			location.href ="${cpath}/joinCircle.do?circle_seq=${circle_detail.circle_seq}";
+		}
+	</script>
 	<!-- 로그인 기능 -->
 <script type="text/javascript">
 		function login() {
@@ -558,14 +654,18 @@
 
 	<!-- 게시판에서 세부게시판 클릭시 board_seq 넘기는 부분 -->
 	<script type="text/javascript">
-		function showAlbum() {
+		function showAlbum(element ,board_seq, circle_seq) {
+			
+			$('#board_seq').val(board_seq);
+			$('#circle_seq').val(circle_seq);
+			
 			document.getElementById('frm').submit();
 		}
 	</script>
 
 	<script type="text/javascript">
-		function showText(board_Seq) {
-			var link = '${cpath}/c_Tdetail.do?boardSeq='+board_Seq;
+		function showText(element,board_seq, circle_seq) {
+			var link = '${cpath}/c_Tdetail.do?circle_seq='+circle_seq+'&board_seq='+board_seq;
 			location.href = link;
 		}
 	</script>

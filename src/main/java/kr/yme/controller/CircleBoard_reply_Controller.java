@@ -43,13 +43,30 @@ public class CircleBoard_reply_Controller {
 		
 		return "redirect:/c_Adetail.do?board_seq=" + rvo.getR_group()+"&circle_seq="+pvo.getCircle_seq();
 	}
+	@PostMapping("/c_treply.do") 
+	public String replyT(@ModelAttribute("vo") Circle_board vo, Circle_board_reply rvo) {
+		//1. 부모글의 정보 가져오기
+		Circle_board pvo = mapper.boardGet(rvo.getR_group());
+		
+		
+		//5. 답글저장`
+		mapper.replyInsert(rvo);
+		
+		return "redirect:/c_Tdetail.do?board_seq=" + rvo.getR_group()+"&circle_seq="+pvo.getCircle_seq();
+	}
 	
 
 	  // 댓글 좋아요
 	  @GetMapping("/c_like_reply.do")
-	  public String likeReply(@RequestParam("board_seq") Integer board_seq, @RequestParam("rSeq") Integer r_seq) {
+	  public String likeReply( @RequestParam("circle_seq") Integer circle_seq,@RequestParam("board_seq") Integer board_seq, @RequestParam("r_seq") Integer r_seq) {
 		  	mapper.recommendReply(r_seq);
-			return "redirect:/c_Adetail.do?board_seq=" + board_seq;
+			return "redirect:/c_Adetail.do?circle_seq="+circle_seq+"&board_seq=" + board_seq;
+	  }
+	  // 댓글 좋아요
+	  @GetMapping("/c_like_Treply.do")
+	  public String likeTReply( @RequestParam("circle_seq") Integer circle_seq,@RequestParam("board_seq") Integer board_seq, @RequestParam("r_seq") Integer r_seq) {
+		  mapper.recommendReply(r_seq);
+		  return "redirect:/c_Tdetail.do?circle_seq="+circle_seq+"&board_seq=" + board_seq;
 	  }
 
 	  // 댓글 삭제    본인 댓글인지 확인하는 로직 필요
@@ -57,5 +74,10 @@ public class CircleBoard_reply_Controller {
 	  public String removeReply(int board_seq, int r_seq, int circle_seq) {
 		  	mapper.removeReply(r_seq);
 			return "redirect:/c_Adetail.do?board_seq=" + board_seq+"&circle_seq="+circle_seq;
+	  }
+	  @RequestMapping("/c_remove_Treply.do")
+	  public String removeTReply(int board_seq, int r_seq, int circle_seq) {
+		  mapper.removeReply(r_seq);
+		  return "redirect:/c_Tdetail.do?board_seq=" + board_seq+"&circle_seq="+circle_seq;
 	  }
 }

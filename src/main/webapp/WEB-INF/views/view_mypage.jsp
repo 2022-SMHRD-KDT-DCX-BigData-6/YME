@@ -224,38 +224,43 @@
 						</ul>
 					</div>
 
-					<div class="dropdown px-3">
+						<div class="dropdown px-3">
 						<a class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img
-							src="./resources/images/medium-shot-happy-man-smiling.jpg"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
 							class="profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 						</a>
 						<ul class="dropdown-menu bg-white shadow">
 							<li>
 								<div class="dropdown-menu-profile-thumb d-flex">
-									<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
+								<c:if test="${mc_vo eq 'x' }">
+									<img src="./resources/images/icons/i_noProfile.png"
 										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+								<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 
 									<div class="d-flex flex-column">
-										<small>Thomas</small> <a href="#">thomas@site.com</a>
+										<small>${mvo.nick}</small>
 									</div>
 								</div>
 							</li>
 
-							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+							<li><a class="dropdown-item" href="${cpath}/myPage.do">
 									<i class="bi-person me-2"></i> Profile
 							</a></li>
 
-							<li><a class="dropdown-item" href="setting.html"> <i
-									class="bi-gear me-2"></i> Settings
-							</a></li>
-
-							<li><a class="dropdown-item" href="help-center.html"> <i
-									class="bi-question-circle me-2"></i> Help
-							</a></li>
-
 							<li class="border-top mt-3 pt-2 mx-4"><a
-								class="dropdown-item ms-0 me-0" href="#"> <i
+								class="dropdown-item ms-0 me-0" href="${cpath }/logout.do"> <i
 									class="bi-box-arrow-left me-2"></i> Logout
 							</a></li>
 						</ul>
@@ -269,7 +274,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<nav id="sidebarMenu"
-				class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
 						<li class="nav-item"><a class="nav-link"
@@ -304,7 +309,7 @@
 						</c:if>
 						<c:if test="${!empty mvo}">
 							<li class="nav-item"><a class="nav-link"
-								href="#"> <i class="bi-person me-2"></i>
+								href="${cpath}/make_profile.do"> <i class="bi-person me-2"></i>
 									동물 프로필 만들기
 							</a></li>
 						</c:if>
@@ -331,7 +336,7 @@
 			</nav>
 
 			<main
-				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-10 px-md-4 border-start">
 				<div class="title-group mb-4" style="text-align: center;">
 	<small class="text-muted">Welcome!</small>
 	<h1 class="h2 mb-0">${mvo.u_name} ${mvo.nick}님,</h1>
@@ -344,8 +349,16 @@
 							class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
 							style="width: 80%; margin: 0 auto;">
 							<div class="custom-block-profile-image-wrap mb-4">
-								<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
-									class="custom-block-profile-image img-fluid" alt=""> 
+								 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
+							class="custom-block-profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="custom-block-profile-image img-fluid" alt="">
+								</c:if>
+							
 							</div>
 							<div class="custom-block custom-block-bottom d-flex flex-wrap"
 								style="margin-bottom: 0px; background-color: white;">
@@ -701,6 +714,21 @@
 			 $('#my_circle').css("display","none");
 		 }
 	 }
+	</script>
+	
+	<script type="text/javascript">
+		function login() {
+			
+			var id = $('#id').val();
+			var pw = $('#pw').val();
+			
+			if(id !=""&& pw !=""){
+				document.getElementById('lfrm').submit();
+			}else{
+				
+				alert("아이디 비밀번호를 확인해 주세요!");
+			}
+		}
 	</script>
 </body>
 </html>

@@ -1570,32 +1570,37 @@
 
 					<div class="dropdown px-3">
 						<a class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img
-							src="./resources/images/medium-shot-happy-man-smiling.jpg"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							 <c:if test="${mc_vo eq 'x' }">
+							 <img
+							src="./resources/images/icons/i_noProfile.png"
 							class="profile-image img-fluid" alt="">
+							</c:if>
+							<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 						</a>
 						<ul class="dropdown-menu bg-white shadow">
 							<li>
 								<div class="dropdown-menu-profile-thumb d-flex">
-									<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
+								<c:if test="${mc_vo eq 'x' }">
+									<img src="./resources/images/icons/i_noProfile.png"
 										class="profile-image img-fluid me-3" alt="">
+								</c:if>
+								<c:if test="${mc_vo ne 'x' }">
+									<img src="./resources/images/animal_images/${mc_vo.ani_name}.png"
+										class="profile-image img-fluid me-3" alt="">
+								</c:if>
 
 									<div class="d-flex flex-column">
-										<small>Thomas</small> <a href="#">thomas@site.com</a>
+										<small>${mvo.nick}</small>
 									</div>
 								</div>
 							</li>
 
-							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+							<li><a class="dropdown-item" href="${cpath}/myPage.do">
 									<i class="bi-person me-2"></i> Profile
-							</a></li>
-
-							<li><a class="dropdown-item" href="setting.html"> <i
-									class="bi-gear me-2"></i> Settings
-							</a></li>
-
-							<li><a class="dropdown-item" href="help-center.html"> <i
-									class="bi-question-circle me-2"></i> Help
 							</a></li>
 
 							<li class="border-top mt-3 pt-2 mx-4"><a
@@ -1615,7 +1620,7 @@
 				class="col-md-3 col-lg-3 d-md-block sidebar collapse">
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="${cpath}/main.do"> <i
 								class="bi-house-fill me-2"></i> 메인
 						</a></li>
@@ -1624,7 +1629,7 @@
 								<i class="bi-wallet me-2"></i> 동아리 찾기
 						</a></li>
 						<c:if test="${!empty mvo}">
-						<li class="nav-item"><a class="nav-link" href="javascript:void(0);" onclick="my_circle()">
+						<li class="nav-item"><a class="nav-link active" href="javascript:void(0);" onclick="my_circle()">
 								<i class="bi-person me-2"></i> 내 동아리</a>
 								<ul style="display: none" id="my_circle">
 									<li class="nav-item" style="list-style-type: none">
@@ -1699,8 +1704,8 @@
 
 									<div class="title"
 										style="display: flex; align-items: center; justify-content: space-between;">
-										<div>${detail_album.board_title}</div>
-
+										<div>${detail_album.board_title} </div>
+										<small>조회수 ${detail_album.count}</small>
 									</div>
 
 								</div>
@@ -1721,7 +1726,7 @@
 											<div onclick="show_loader();location.href='/web/user/26224'"
 												style="display: inline-block">
 												<div class="user_name"
-													style="display: flex; align-items: center;">${detail_nick.nick}</div>
+													style="display: flex; align-items: center;">${detail_album.id}</div>
 											</div>
 
 
@@ -1760,7 +1765,7 @@
 									
 								<div id="like_cnt"
 									style="font-weight: 300; font-size: 12px; line-height: 14px; text-align: center; letter-spacing: -0.02em; color: #8E8E8E;">
-									<span id="like_value_${detail_album.board_seq}">11</span>
+									<span id="like_value">${detail_album.likes}</span>
 								</div>
 							</div>
 
@@ -1784,7 +1789,7 @@
 												<div class="c_col_01" id="reply_01_14266"
 													style="margin-right: 10px;">
 													<img data-id="14266" class="user_thumb"
-														src="https://mycampus-storage.s3.ap-northeast-2.amazonaws.com/s/shared/temporary/2023/06/17/bc4444ac-94d2-45cb-8542-123d137e76c9.jpeg"
+														src="./resources/images/icons/i_noProfile.png"
 														width="35" height="35">
 												</div>
 												
@@ -1820,7 +1825,7 @@
 													<span
 														style="display: flex; flex-direction: row; align-items: center; margin-right: 20px;">
 														<span class="c_col_03" id="reply_03_14266"> <span
-															href="#" onclick="`his)" data-index="14266" data-like="0"
+															 data-index="14266" data-like="0"
 															class="heart"
 															style="padding-left: 13px; margin-right: 5px; margin-bottom: 0;"></span>
 													</span> <span class="fw400_12_14_8E r_cnt" id="14266_like_cnt">${reply.likes}</span>
@@ -1866,19 +1871,29 @@
 				</div>
 			</main>
 		</div>
+		</div>
+		<script src="./resources/js/jquery.min.js"></script>
+	<script src="./resources/js/bootstrap.bundle.min.js"></script>
+	<script src="./resources/js/apexcharts.min.js"></script>
+	<script src="./resources/js/custom.js"></script>
+		<script type="text/javascript">
+			function show_loader(){
+				
+			}
+		</script>
 		<script type="text/javascript">
 			function likeReply(boardNo, replyNo) {
 				if(confirm('이 댓글을 좋아요 하시겠습니까?')) {
-					location.replace("${cpath}/c_like_reply.do?boardSeq="+boardNo+"&rSeq="+replyNo)
+					location.replace("${cpath}/c_like_reply.do?circle_seq="+${detail_album.circle_seq}+"&board_seq="+boardNo+"&r_seq="+replyNo)
 				}
 			}
 			
 
 			function likeBoard(no) {
 
-				if(confirm('이 글을 좋아요 하시겠습니까? (임시)')) {
-					location.replace("${cpath}/c_like_board.do?boardSeq="+no)
-				}
+				
+					location.replace("${cpath}/c_like_board.do?board_seq="+no+"&circle_seq="+${detail_album.circle_seq})
+				
 			}
 			
 			function removeReply(boardNo, replyNo) {

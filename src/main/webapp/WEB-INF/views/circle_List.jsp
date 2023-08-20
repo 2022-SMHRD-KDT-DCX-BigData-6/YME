@@ -36,7 +36,7 @@
 											</div>
 
 											<div class="d-flex align-items-center pt-3">
-												<a href="job-details.html" class="custom-btn btn"
+												<a href="${cpath}/c_board.do?circle_seq=${vo.circle_seq}" class="custom-btn btn"
 													style="width: 100%;">동아리 방문</a>
 											</div>
 										</div>

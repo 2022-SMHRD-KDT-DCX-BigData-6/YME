@@ -66,5 +66,7 @@ values( #{circle_seq}, #{id}, #{board_title}, #{board_content}, #{board_img}, #{
 		update Circle_board set likes = likes+1  where board_seq=#{board_seq}
 	</update>
 
-	
+	<insert id="joinCircle" parameterType="kr.yme.entity.Circle_join">
+		insert into Circle_join(id,circle_seq,joined_at)values(#{id},#{circle_seq},now())
+	</insert>
 </mapper>

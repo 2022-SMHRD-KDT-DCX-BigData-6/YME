@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.yme.entity.Circle;
+import kr.yme.entity.M_character;
 import kr.yme.entity.Member;
 import kr.yme.entity.Tendency;
 import kr.yme.mapper.LoginMapper;
@@ -33,8 +34,18 @@ public class LoginController {
 	@RequestMapping("/login.do")
 	public String Login(Member vo, HttpSession session) {
 		Member mvo = mapper.login(vo);
-		
 		if (mvo != null) {
+			String id = mvo.getId();
+			
+			System.out.println(id);
+			M_character mc_vo= mapper.getProfile(id);
+			if(mc_vo != null) {
+				session.setAttribute("mc_vo", mc_vo);
+				
+			}else {
+				session.setAttribute("mc_vo", "x");
+			}
+			
 			Tendency tvo = r_mapper.selTendency(mvo.getId());
 			session.setAttribute("mvo", mvo);
 			List<Circle> t_list1 =r_mapper.recoCircle1(tvo);

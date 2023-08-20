@@ -2794,6 +2794,12 @@ padding-top:10px;
     padding: 1px 1px;
     float: left;
 }
+.col-custom {
+    box-sizing: border-box;
+    width: 20%;
+    padding: 1px 1px;
+    float: left;
+}
 .square {
       position: relative;
       width: 100%;

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.yme.entity.Circle;
 import kr.yme.entity.Circle_board;
 import kr.yme.entity.Circle_board_reply;
+import kr.yme.entity.Circle_join;
 import kr.yme.entity.Member;
 import kr.yme.mapper.CircleBoard_reply_mapper;
 import kr.yme.mapper.Circle_board_mapper;
@@ -84,6 +85,9 @@ public class Circle_board_Controller {
 	  
 	  Member detail_name = mapper.selectAname(circle_seq);
 	  request.addAttribute("detail_name", detail_name);
+	  List<Circle_board_reply> replies = replyMapper.getReplies(board_seq);
+		request.addAttribute("replies", replies == null ? new ArrayList() : replies);
+	  
 	  //조회수 누적 //좋아요 누적 
 	  return "view_circleBoard_textDetail"; 
 	  }
@@ -126,12 +130,29 @@ public class Circle_board_Controller {
 	
 	  // 게시판 좋아요 기능
 	  @GetMapping("/c_like_board.do")
-	  public String likeBoard(@RequestParam("boardSeq") Integer boardSeq) {
-		  mapper.recommendReply(boardSeq);
-		  return "redirect:/c_Adetail.do?boardSeq=" + boardSeq;
+	  public String likeBoard(@RequestParam("board_seq") Integer board_seq, @RequestParam("circle_seq") Integer circle_seq) {
+		  mapper.recommendReply(board_seq);
+		  return "redirect:/c_Adetail.do?board_seq=" + board_seq+"&circle_seq="+circle_seq;
+	  }
+	  @GetMapping("/c_like_tboard.do")
+	  public String liketBoard(@RequestParam("board_seq") Integer board_seq, @RequestParam("circle_seq") Integer circle_seq) {
+		  mapper.recommendReply(board_seq);
+		  return "redirect:/c_Tdetail.do?board_seq=" + board_seq+"&circle_seq="+circle_seq;
 	  }
 	  
-	  
+	  @RequestMapping("/joinCircle.do")
+	  public String joinCircle(int circle_seq, Model model, HttpSession session) {
+		  Member mvo = (Member) session.getAttribute("mvo");
+		  String id = mvo.getId();
+		  Circle_join cjvo = new Circle_join();
+		  cjvo.setId(id);
+		  cjvo.setCircle_seq(circle_seq);
+		  mapper.joinCircle(cjvo);
+		  
+		  
+		  model.addAttribute("circle_seq", circle_seq);
+		  return "redirect:/c_board.do";
+	  }
 	  
 	  
 	  

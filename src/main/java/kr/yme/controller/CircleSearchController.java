@@ -36,13 +36,11 @@ public class CircleSearchController {
 		
 		if(value1 != null) {
 			String circle_univ = value1;
-			System.out.println("들어옴???-------------------------->"+circle_univ);
 			s_vo.setCircle_univ(circle_univ);
 			list = mapper.s_circleSearch(s_vo);
 			
 		} else {
 			String circle_name = value2;
-			System.out.println("들어옴???-------------------------->"+circle_name);
 			c_vo.setCircle_name(circle_name);
 			list = mapper.c_circleSearch(c_vo);
 			System.out.println(list);

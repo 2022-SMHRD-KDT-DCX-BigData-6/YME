@@ -29,7 +29,7 @@ public interface CircleBoard_reply_mapper {
 	public void replyInsert(Circle_board_reply rvo);
 	
 	//게시글 좋아요 메서드
-	public void recommendReply(int replySeq);
+	public void recommendReply(int reply_seq);
 	
 	
 	public void removeReply(int reply_seq);
