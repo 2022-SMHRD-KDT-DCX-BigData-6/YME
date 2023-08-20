@@ -13,13 +13,14 @@ public interface Circle_board_mapper {
 
 	public Circle selectDetail(int circle_seq);
 	public Member selectName(int circle_seq);
-	public List<Circle_board> selectBoard(int circle_seq);
+	public List<Circle_board> select_A_Board(int circle_seq);
+	public List<Circle_board> select_T_Board(int circle_seq);
 	public int sel_c_member(Member mvo);
 	
-	public Circle_board selectAdetail(int boardSeq);
-	public Member selectAname();
+	public Circle_board selectAdetail(int board_seq);
+	public Member selectAname(int circle_seq);
 	
-	public Circle_board selectTdetail(int boardSeq);
+	public Circle_board selectTdetail(int board_seq);
 	
 	public void insertBoard(Circle_board vo);
 	public void insertImageBoard(Circle_board vo);
@@ -33,7 +34,7 @@ public interface Circle_board_mapper {
 	//게시글 좋아요 메서드
 		public void recommendReply(int boardSeq);
 		
-		public void addHit(int boardSeq);
+		public void addHit(int board_seq);
 		
 	// 나중에 매개변수 값 넘겨줄거 추가
 }

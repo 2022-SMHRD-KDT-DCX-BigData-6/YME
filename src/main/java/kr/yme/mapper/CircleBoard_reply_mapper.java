@@ -32,11 +32,11 @@ public interface CircleBoard_reply_mapper {
 	public void recommendReply(int replySeq);
 	
 	
-	public void removeReply(int replySeq);
+	public void removeReply(int reply_seq);
 	
 
 	//댓글 리스트로 가져와 목록 보여주기 
-	public List<Circle_board_reply> getReplies(int boardSeq);
+	public List<Circle_board_reply> getReplies(int board_seq);
 	
 
 	

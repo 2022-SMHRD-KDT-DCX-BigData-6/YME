@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,21 +41,21 @@ public class CircleBoard_reply_Controller {
 		//5. 답글저장`
 		mapper.replyInsert(rvo);
 		
-		return "redirect:/c_Adetail.do?boardSeq=" + rvo.getR_group();
+		return "redirect:/c_Adetail.do?board_seq=" + rvo.getR_group()+"&circle_seq="+pvo.getCircle_seq();
 	}
 	
 
 	  // 댓글 좋아요
 	  @GetMapping("/c_like_reply.do")
-	  public String likeReply(@RequestParam("boardSeq") Integer boardSeq, @RequestParam("rSeq") Integer rSeq) {
-		  	mapper.recommendReply(rSeq);
-			return "redirect:/c_Adetail.do?boardSeq=" + boardSeq;
+	  public String likeReply(@RequestParam("board_seq") Integer board_seq, @RequestParam("rSeq") Integer r_seq) {
+		  	mapper.recommendReply(r_seq);
+			return "redirect:/c_Adetail.do?board_seq=" + board_seq;
 	  }
 
 	  // 댓글 삭제    본인 댓글인지 확인하는 로직 필요
-	  @GetMapping("/c_remove_reply.do")
-	  public String removeReply(@RequestParam("boardSeq") Integer boardSeq, @RequestParam("rSeq") Integer rSeq) {
-		  	mapper.removeReply(rSeq);
-			return "redirect:/c_Adetail.do?boardSeq=" + boardSeq;
+	  @RequestMapping("/c_remove_reply.do")
+	  public String removeReply(int board_seq, int r_seq, int circle_seq) {
+		  	mapper.removeReply(r_seq);
+			return "redirect:/c_Adetail.do?board_seq=" + board_seq+"&circle_seq="+circle_seq;
 	  }
 }

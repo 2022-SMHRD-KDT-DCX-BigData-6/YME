@@ -1682,9 +1682,7 @@
 					<div class="common_top_nav_header">
 						<div
 							style="display: flex; justify-content: center; align-items: center;">
-							<img onclick="goback()"
-								src=".\resources\images\angle_left_new.svg"
-								style="position: absolute; left: 0px;"> 게시글 상세
+							 게시글 상세
 
 						</div>
 					</div>
@@ -1696,29 +1694,6 @@
 								<div
 									style="display: flex; flex-direction: row; align-items: center; margin-bottom: 20px;">
 
-									<!--메인 홈 이동-->
-									<div onclick="show_loader();location.href='/web'"
-										class="top_icon_home fw400_12_14_3A"
-										style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 77.17px; height: 30px; background: #F5F5F5; border-radius: 10px; padding: 8px 10px; margin-right: 6px; white-space: nowrap;">
-										<img
-											src="http://mycampus-test.eba-jramfkx3.ap-northeast-2.elasticbeanstalk.com/s/front/images/icons/home.svg"
-											alt="home"
-											style="margin-right: 8px; width: 16px; height: 16px;">
-										메인 홈
-									</div>
-
-									<!--동아리 홈 이동-->
-									<div
-										onclick="show_loader();location.href='/web/club/info/1655/405/3'"
-										class="top_icon_home fw400_12_14_3A">동아리 홈</div>
-									<div style="display: flex;">
-
-										<!-- 활동 앨범  -->
-										<div
-											<div onclick="show_loader();location.href='/web/club/base_board/club_history/1655'" class="top_icon_home fw400_12_14_3A" 
-											style="width: fit-content;display: flex;flex-direction: row;justify-content: center;align-items: center;height: 30px;background: #F5F5F5;border-radius: 10px;padding: 8px 10px;margin-right: 6px;white-space: nowrap;">
-											활동 앨범</div></div>
-									</div>
 								</div>
 								<div>
 
@@ -1771,7 +1746,7 @@
 							<div class="activity_info_content mb-5 mt-3"
 								style="min-height: auto;">
 								<div id="linktest"
-									style="word-break: break-word; text-align: left;">${detail_album.board_content}</div>
+									style="word-break: break-word; padding-top:20px; text-align: center;">${detail_album.board_content}</div>
 							</div>
 						</div>
 
@@ -1794,7 +1769,7 @@
 						</div>
 
 
-						<div class="reply_box" id="reply_box" style="">
+						<div class="reply_box" id="reply_box" style="padding-bottom: 2px">
 							<div class="comment_item f-15"
 								style="width: 830px; height: 38px; text-align: left;">
 								댓글 <span class="color-mc">${replies.size()}</span>
@@ -1812,11 +1787,12 @@
 														src="https://mycampus-storage.s3.ap-northeast-2.amazonaws.com/s/shared/temporary/2023/06/17/bc4444ac-94d2-45cb-8542-123d137e76c9.jpeg"
 														width="35" height="35">
 												</div>
+												
 												<div class="reply_right_div">
-													<button
-														style="float: right; position: absolute; right: 10px;"
-														onclick="removeReply(${detail_album.board_seq}, ${reply.reply_seq})">임시삭제
-														버튼</button>
+													<img alt="x" src="./resources/images/i_del.png" 
+													style="width: 30px; height: 30px;float: right; position: absolute; right: 30px;"
+													onclick="removeReply(${detail_album.board_seq}, ${reply.reply_seq})">
+													
 													<div class="c_col_02" style="line-height: 1;">
 														<div id="reply_02_14266">
 															<span class="rw"
@@ -1829,7 +1805,7 @@
 																style="white-space: break-spaces; word-break: break-word; text-align: left;">${reply.reply_content}</span>
 														</div>
 													</div>
-													<div>
+											 		<div>
 
 														<i class="fa fa-ellipsis-h reply_report" id="14266"
 															onclick="report_menu_option(this.id, 26146)"
@@ -1866,25 +1842,20 @@
 						</div>
 						<div>
 							<div class="total_div" style="flex-direction: row;">
-								<div class="reply_div" style="width: calc(100% - 60px);">
+								<div class="reply_div" style="width: calc(100% - 0px);">
 
 									<form action="${cpath}/c_reply.do" method="post">
 
-										<input type="hidden" name="id" value="${detail_album.id}" />
-										<input type="hidden" name="reply_id" value="${mvo.id}" /> <input
+										<input type="hidden" name="id" value="${detail_album.id}" >
+										<input type="hidden" name="reply_id" value="${mvo.id}" > <input
 											type="hidden" name="r_group"
-											value="${detail_album.board_seq}" />
-
-
+											value="${detail_album.board_seq}">
+										<input type="hidden" name="circle_seq" value="${detail_album.circle_seq }">
+										
 										<div class="reply_input_tbl">
-											<textarea placeholder=" 댓글을 입력해주세요." class="reply_input_box"
-												name="reply_content" id="comment"
-												style="height: 35px !important; resize: none; border: none;"></textarea>
-
-											<button type="submit" class="send_btn">등록</button>
-											<!-- <div class="send_btn">등록</div> -->
-										</div>
-
+  <input type="text" class="form-control" placeholder="댓글 입력" aria-label="Recipient's username" name="reply_content" aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>
+</div>
 									</form>
 
 								</div>
@@ -1913,7 +1884,7 @@
 			function removeReply(boardNo, replyNo) {
 
 				if(confirm('댓글을 삭제 하시겠습니까?')) {
-					location.replace("${cpath}/c_remove_reply.do?boardSeq="+boardNo+"&rSeq="+replyNo)
+					location.replace("${cpath}/c_remove_reply.do?board_seq="+boardNo+"&r_seq="+replyNo+"&circle_seq="+${detail_album.circle_seq})
 				}
 			}
 		</script>

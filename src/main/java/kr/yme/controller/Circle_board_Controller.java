@@ -39,8 +39,10 @@ public class Circle_board_Controller {
 		Member member_name = mapper.selectName(circle_seq);
 		request.addAttribute("member_name", member_name);
 
-		List<Circle_board> circle_board = mapper.selectBoard(circle_seq);
-		request.addAttribute("circle_board", circle_board);
+		List<Circle_board> circle_A_board = mapper.select_A_Board(circle_seq);
+		request.addAttribute("circle_A_board", circle_A_board);
+		List<Circle_board> circle_T_board = mapper.select_T_Board(circle_seq);
+		request.addAttribute("circle_T_board", circle_T_board);
 		
 		Member mvo = (Member)session.getAttribute("mvo");
 		
@@ -53,18 +55,18 @@ public class Circle_board_Controller {
 
 	// 2.앨범 상세보기 요청
 	@RequestMapping("/c_Adetail.do")
-	public String circle_album_detail(Model request,int boardSeq) {
+	public String circle_album_detail(Model request,int board_seq, int circle_seq) {
 
-		Circle_board detail_album = mapper.selectAdetail(boardSeq);
+		Circle_board detail_album = mapper.selectAdetail(board_seq);
 		request.addAttribute("detail_album", detail_album);
-
-		Member detail_name = mapper.selectAname();
+		
+		Member detail_name = mapper.selectAname(circle_seq);
 		request.addAttribute("detail_name", detail_name);
 		
-		List<Circle_board_reply> replies = replyMapper.getReplies(boardSeq);
+		List<Circle_board_reply> replies = replyMapper.getReplies(board_seq);
 		request.addAttribute("replies", replies == null ? new ArrayList() : replies);
 		
-		mapper.addHit(boardSeq);
+		mapper.addHit(board_seq);
 
 		// 조회수 누적
 		// 좋아요 누적
@@ -75,15 +77,15 @@ public class Circle_board_Controller {
 	  // 3.자유게시판 상세보기 요청
 	  
 	  @RequestMapping("/c_Tdetail.do") 
-	  public String circle_text_detail(Model request, int boardSeq) {
+	  public String circle_text_detail(Model request, int board_seq, int circle_seq) {
 	  
-	  Circle_board detail_text = mapper.selectTdetail(boardSeq);
+	  Circle_board detail_text = mapper.selectTdetail(board_seq);
 	  request.addAttribute("detail_text", detail_text);
 	  
-	  Member detail_name = mapper.selectAname();
+	  Member detail_name = mapper.selectAname(circle_seq);
 	  request.addAttribute("detail_name", detail_name);
 	  //조회수 누적 //좋아요 누적 
-	  return "view_circleBoardDetail"; 
+	  return "view_circleBoard_textDetail"; 
 	  }
 	 
 	  
@@ -96,18 +98,18 @@ public class Circle_board_Controller {
 	  
 	  //4.2 게시글 등록(post방식)
 	  @PostMapping("/c_register.do")
-	  public String register(Circle_board vo , @RequestParam("fileName") String fileName, HttpSession session) {
+	  public String register(Circle_board vo , @RequestParam("fileName") String fileName, HttpSession session, Model model) {
 		  // 세션에서 id 가져오기
 		  Member mvo = (Member) session.getAttribute("mvo");
 		  String id = mvo.getId();
 		  // Circle_board vo에 가져온 아이디값 담기
 		  vo.setId(id);
+		  model.addAttribute("circle_seq", vo.getCircle_seq());
 		  if(vo.getBoard_type()=="X") {
 			  
 			  mapper.insertBoard(vo);
 		  }else {
 			  String route = vo.getBoard_img();
-			  
 			  // 경로 새로 할당
 			  route = "./resources/images/"+route;
 			  // Circle_board vo에 img 경로 담기
@@ -118,7 +120,7 @@ public class Circle_board_Controller {
 			  // mapper에 새로운 함수 만들어서 이미지 파일 등록하기 
 			  
 		  }
-		  return "view_circleBoard";
+		  return "redirect:c_board.do";
 	  }
 	  
 	

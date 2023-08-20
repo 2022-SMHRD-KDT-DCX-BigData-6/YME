@@ -7,7 +7,7 @@
 
 <c:forEach var="vo" items="${list}" varStatus="status">
 
-								<div class="col-lg-4 col-md-6 col-12">
+								<div class="col-lg-4 col-md-6 col-12" >
 									<div class="job-thumb job-thumb-box">
 										<div class="job-image-box-wrap">
 											<a href="job-details.html"> <img

@@ -291,7 +291,7 @@
 							</div>
 						</div>
 
-						<c:if test="${!mvo.circle_at eq circle_detail.circle_name}">
+						<c:if test="${mvo.circle_at ne circle_detail.circle_name}">
 						<!--모닥불, 가입 버튼, 출첵-->
 						<div class="content"
 							style="display: flex; justify-content: space-between; margin: 0 20px; border-bottom: 1px solid #F5F5F5; padding-bottom: 25px;">
@@ -307,6 +307,34 @@
 											<div
 												onclick="alert('대학교 인증이 필요합니다.');show_loader();location.href='/web/user/university'">
 												<div style="color: #FFFFFF; font-size: 16px;">가입</div>
+											</div>
+										
+										
+										</div>
+									</div>
+									<!--총동아리연합회 + 소속 회원 X-->
+
+								</div>
+
+							</div>
+						</div>
+						</c:if>
+						<c:if test="${mvo.circle_at eq circle_detail.circle_name}">
+						<!--모닥불, 가입 버튼, 출첵-->
+						<div class="content"
+							style="display: flex; justify-content: space-between; margin: 0 20px; border-bottom: 1px solid #F5F5F5; padding-bottom: 25px;">
+							<div style="width: 100%;">
+
+								<div style="display: flex; justify-content: space-between;">
+
+									<div style="width: 100%; text-align: center;">
+										<div class="join_btn"
+											style="width: 100%; background: #4cbcaf; color: #FFFFFF;">
+											
+											
+											<div
+												onclick="show_loader();location.href='${cpath}/c_register.do?circle_seq=${circle_detail.circle_seq}'">
+												<div style="color: #FFFFFF; font-size: 16px;">게시글 쓰러가기</div>
 											</div>
 										
 										
@@ -381,16 +409,17 @@
 										<div class="board_main_title">활동 앨범</div>
 									</div>
 									<div class="row" style="margin: 0 20px;">
-										<c:if test="${empty circle_board}">
+										<c:if test="${empty circle_A_board}">
 											<h6>
 											<img alt="x" src="./resources/images/icons/i_board.png" style="width: 20%">
 											<span>아직 게시글이 없어요!</span> </h6>
 										</c:if>
-										<c:if test="${!empty circle_board}">
+										<c:if test="${!empty circle_A_board}">
 										<form id="frm" action="${cpath}/c_Adetail.do" method="post">
-											<c:forEach var="vo" items="${circle_board}">
+											<c:forEach var="vo" items="${circle_A_board}">
 												<input type="hidden" name="board_seq"
 													value="${vo.board_seq}">
+													<input type="hidden" name ="circle_seq" value="${vo.circle_seq}">
 												<div class="col">
 													<div class="square"
 														style="background-image: url('${vo.board_img}'); background-size: cover; background-position: center;"
@@ -414,21 +443,20 @@
 										<div class="board_main_title">자유 게시판</div>
 									</div>
 
-										<c:if test="${empty circle_board}">
+										<c:if test="${empty circle_T_board}">
 											<h6 style="margin-left: 35%">
 											<img alt="x" src="./resources/images/icons/i_board.png" style="width: 20%">
 											<span>아직 게시글이 없어요!</span> </h6>
 										</c:if>
 
 
-
+									<c:if test="${!empty circle_T_board}">
 									<form id="frm2" action="${cpath}/c_Tdetail.do" method="post">
-										<c:forEach var="vo" items="${circle_board}">
-											<c:if test="${vo.board_type eq 'X'}">
+										<c:forEach var="vo" items="${circle_T_board}">
 											<div onclick="showText(${vo.board_seq})">
 											<div class="row"
 												style="margin: 0 20px; border-bottom: 1px solid #F5F5F5; padding-bottom: 25px; margin-bottom: 25px;"
-												onclick="boardDetail()">
+												>
 												<div
 													style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 													<div
@@ -452,9 +480,9 @@
 														style="display: flex; flex-direction: row; align-items: center;">
 														<div class="club_board_name"
 															style="display: flex; flex-direction: row; align-items: center; margin-right: 10px;">
-															<img src=".\resources\images\like.svg"
+															<img src="./resources/images/icons/i_hearts.png"
 																style="width: 15px; height: 15px; margin-right: 5px;">
-															0
+															${vo.likes}
 														</div>
 														<div class="club_board_name"
 															style="display: flex; flex-direction: row; align-items: center;">
@@ -466,9 +494,9 @@
 												</div>
 											</div>
 										</div>
-											</c:if>
 										</c:forEach>
 									</form>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -523,9 +551,8 @@
 	</script>
 
 	<script type="text/javascript">
-		function boardDetail() {
-			var link = '${cpath}/c_Adetail.do';
-			location.href = link;
+		function show_loader(){
+			
 		}
 	</script>
 
@@ -537,8 +564,9 @@
 	</script>
 
 	<script type="text/javascript">
-		function showText(boardSeq) {
-			var link = '${cpath}/c_Tdetail.do?boardSeq='+boardSeq;
+		function showText(board_Seq) {
+			var link = '${cpath}/c_Tdetail.do?boardSeq='+board_Seq;
+			location.href = link;
 		}
 	</script>
 

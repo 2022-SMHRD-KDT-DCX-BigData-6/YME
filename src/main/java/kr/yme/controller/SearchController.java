@@ -38,8 +38,10 @@ public class SearchController {
 		Member member_name = mapper.selectName(a);
 		model.addAttribute("member_name", member_name);
 
-		List<Circle_board> circle_board = mapper.selectBoard(a);
-		model.addAttribute("circle_board", circle_board);
+		List<Circle_board> circle_A_board = mapper.select_A_Board(a);
+		model.addAttribute("circle_A_board", circle_A_board);
+		List<Circle_board> circle_T_board = mapper.select_T_Board(a);
+		model.addAttribute("circle_T_board", circle_T_board);
 		
 		Member mvo = (Member)session.getAttribute("mvo");
 		

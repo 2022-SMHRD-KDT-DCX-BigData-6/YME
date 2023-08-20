@@ -22,8 +22,11 @@
 		select Circle.id, Member.name FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = #{circle_seq}
 	</select>	
 
-	<select id="selectBoard" parameterType="int" resultType="kr.yme.entity.Circle_board">
-		SELECT * FROM Circle_board cb JOIN Member m ON cb.id = m.id WHERE circle_seq = #{circle_seq}
+	<select id="select_A_Board" parameterType="int" resultType="kr.yme.entity.Circle_board">
+		SELECT * FROM Circle_board cb JOIN Member m ON cb.id = m.id WHERE circle_seq = #{circle_seq} and board_type = 'O'
+	</select>	
+	<select id="select_T_Board" parameterType="int" resultType="kr.yme.entity.Circle_board">
+		SELECT * FROM Circle_board cb JOIN Member m ON cb.id = m.id WHERE circle_seq = #{circle_seq} and board_type = 'X'
 	</select>	
 	<select id="sel_c_member" parameterType="kr.yme.entity.Member" resultType="int">
 		select count(*) from Circle_join where id = #{id}
@@ -34,9 +37,9 @@
 		select * from Circle_board Where board_seq = #{board_seq}
 	</select>
 	
-	<select id="selectAname"  resultType="kr.yme.entity.Member">
+	<select id="selectAname" parameterType="int"  resultType="kr.yme.entity.Member">
 		<!-- select Circle.id, Member.name FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = 1 -->
-		select Circle.id, Member.nick FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = 1
+		select Circle.id, Member.nick FROM Circle JOIN Member ON Circle.id = Member.id where circle_seq = #{circle_seq}
 	</select>
 	
 	
@@ -46,12 +49,12 @@
 	
 	<insert id="insertBoard" parameterType="kr.yme.entity.Circle_board">
 		insert into Circle_board(circle_seq, id, board_title, board_content, board_type, board_at)
-values( 3, '1234', #{board_title}, #{board_content}, #{board_type}, now() )
+values( #{circle_seq}, #{id}, #{board_title}, #{board_content}, #{board_type}, now() )
 	</insert>
 	
 	<insert id="insertImageBoard" parameterType="kr.yme.entity.Circle_board">
 		insert into Circle_board(circle_seq, id, board_title, board_content, board_img, board_type, board_at)
-values( 3, #{id}, #{board_title}, #{board_content}, #{board_img}, #{board_type}, now() )
+values( #{circle_seq}, #{id}, #{board_title}, #{board_content}, #{board_img}, #{board_type}, now() )
 	</insert>
 	
 	<update id="addHit" parameterType="int">

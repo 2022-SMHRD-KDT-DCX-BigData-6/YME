@@ -150,6 +150,7 @@
 			</a>
 		</div>
 
+
 		<button class="navbar-toggler position-absolute d-md-none collapsed"
 			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
 			aria-controls="sidebarMenu" aria-expanded="false"
@@ -157,35 +158,40 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<form
-			class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0"
-			action="#" method="get" role="form">
-			<input class="form-control" name="search" type="text"
-				placeholder="Search" aria-label="Search">
-		</form>
 		<!-- 비회원 로그인바 -->
 		<c:if test="${empty mvo}">
 			<div class="dropdown px-3">
 				<a class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false" style="width: 115px;font-style: italic">Login/Join</a>
-				
-				<ul class="dropdown-menu bg-white shadow">
-					<form action="${cpath }/login_any.do" method="post">
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" name="id" id="id"
-								placeholder="ID" style="border-color: #A8DADC;border-style: solid;"><label
-								for="id">ID</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="password" class=" form-control" name="pw" id="pw"
-								placeholder="Password" style="border-color: #A8DADC;border-style: solid;"> <label
-								for="pw">Password</label>
-						</div>
-						<li class="border-top mt-3 pt-2 mx-4"><button type="submit" class="dropdown-item ms-0 me-0"><i
-								class="bi-box-arrow-right me-2" ></i> 로그인</button> 
-								<button type="button" class="dropdown-item ms-0 me-0" onclick="joinPage()"><i
-								class="bi-box-arrow-right me-2"></i> 회원가입</button> </li>
-					</form>
+					data-bs-toggle="dropdown" aria-expanded="false"
+					style="width: 115px; font-style: italic">Login/Join</a>
+
+				<ul class="dropdown-menu bg-white shadow show"
+					data-bs-popper="static">
+					<div style="margin: 0 10px 0 10px;">
+						<form id="lfrm" action="${cpath}/login.do" method="post">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" name="id" id="id"
+									placeholder="ID"
+									style="border-color: #A8DADC; border-style: solid;"><label
+									for="id">ID</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="password" class=" form-control" name="pw" id="pw"
+									placeholder="Password"
+									style="border-color: #A8DADC; border-style: solid;"> <label
+									for="pw">Password</label>
+							</div>
+					</div>
+					<li class="border-top mt-3 pt-2"><button type="button"
+							class="dropdown-item ms-0 me-0" onclick="login()">
+							<i class="bi-box-arrow-right me-2"></i> 로그인
+						</button>
+						</form>
+						<button type="button" class="dropdown-item ms-0 me-0"
+							onclick="joinPage()">
+							<i class="bi-box-arrow-right me-2"></i> 회원가입
+						</button></li>
+
 				</ul>
 			</div>
 		</c:if>
@@ -267,8 +273,8 @@
 								</div>
 							</li>
 
-							<li><a class="dropdown-item" href="profile.html"> <i
-									class="bi-person me-2"></i> Profile
+							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+									<i class="bi-person me-2"></i> Profile
 							</a></li>
 
 							<li><a class="dropdown-item" href="setting.html"> <i
@@ -280,7 +286,7 @@
 							</a></li>
 
 							<li class="border-top mt-3 pt-2 mx-4"><a
-								class="dropdown-item ms-0 me-0" href="#"> <i
+								class="dropdown-item ms-0 me-0" href="${cpath }/logout.do"> <i
 									class="bi-box-arrow-left me-2"></i> Logout
 							</a></li>
 						</ul>
@@ -296,25 +302,57 @@
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="index.html"> <i
+							aria-current="page" href="${cpath}/main.do"> <i
 								class="bi-house-fill me-2"></i> 메인
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="wallet.html">
+						<li class="nav-item"><a class="nav-link" href="${cpath }/circle_search.do">
 								<i class="bi-wallet me-2"></i> 동아리 찾기
 						</a></li>
-
-						<li class="nav-item"><a class="nav-link" href="profile.html">
-								<i class="bi-person me-2"></i> 모임 찾기
-						</a></li>
-
-						<li class="nav-item"><a class="nav-link" href="setting.html">
+						<c:if test="${!empty mvo}">
+						<li class="nav-item"><a class="nav-link" href="javascript:void(0);" onclick="my_circle()">
+								<i class="bi-person me-2"></i> 내 동아리</a>
+								<ul style="display: none" id="my_circle">
+									<li class="nav-item" style="list-style-type: none">
+									<a class="nav-link" href="${cpath}/myCircle.do?circle_at=${mvo.circle_at}">${mvo.circle_at}</a>
+									</li>
+								</ul>
+						</li>
+						</c:if>
+						<c:if test="${!empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="${cpath}/researchPage.do"> <i class="bi-person me-2"></i>
+									성향분석하기
+							</a></li>
+						</c:if>
+						<c:if test="${empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="javascript:void(0);" onclick="alert('로그인후 이용가능합니다');return false;"> <i class="bi-person me-2"></i>
+									성향분석하기
+							</a></li>
+						</c:if>
+						<c:if test="${!empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="${cpath}/make_profile.do"> <i class="bi-person me-2"></i>
+									동물 프로필 만들기
+							</a></li>
+						</c:if>
+						<c:if test="${empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="javascript:void(0);" onclick="alert('로그인후 이용가능합니다');return false;"> <i class="bi-person me-2"></i>
+									동물 프로필 만들기
+							</a></li>
+						</c:if>
+						<c:if test="${!empty mvo}">
+						<li class="nav-item"><a class="nav-link" href="${cpath }/myPage.do">
 								<i class="bi-gear me-2"></i> 내 정보
 						</a></li>
+						</c:if>
+
 						<c:if test="${!empty mvo}">
 							<li class="nav-item border-top mt-auto pt-2"><a
-								class="nav-link" href="${cpath}/logout.do"> <i class="bi-box-arrow-left me-2"></i>
-									Logout
+								class="nav-link" href="${cpath}/logout.do"> <i
+									class="bi-box-arrow-left me-2"></i> Logout
 							</a></li>
 						</c:if>
 					</ul>
@@ -329,9 +367,7 @@
 						style="text-align: center; padding: 15px; font-size: 18px; font-weight: 600; color: #565656; background: white; width: auto; z-index: 98; top: 55px; border-bottom: 1px solid rgba(0, 0, 0, 0.08);">
 						<div
 							style="display: flex; justify-content: center; align-items: center;">
-							<img onclick="goback_reg()"
-								src=".\resources\images\angle_right.svg"
-								style="position: absolute; left: -1px;">게시글 등록
+							게시글 등록
 						</div>
 					</div>
 					<div class="page-content header-clear" style="height: auto;">
@@ -343,7 +379,7 @@
 
 
 								<form action="${cpath}/c_register.do" id="frm" method="post">
-
+									<input type="hidden" name="circle_seq" value="${param.circle_seq}">
 
 									<div class="input_place">
 										<div class="vote_select select_wrap"

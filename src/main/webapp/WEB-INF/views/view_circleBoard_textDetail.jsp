@@ -1459,8 +1459,8 @@
 <body>
 	<header class="navbar sticky-top flex-md-nowrap">
 		<div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
-			<a class="navbar-brand" href="index.html"> <i class="bi-box"></i>
-				10-minutes
+			<a class="navbar-brand" href="${cpath}/main.do"> <img
+				src=".\resources\images\mainLogo.png" style="width: 10%;">&nbsp;10-Minutes
 			</a>
 		</div>
 
@@ -1471,108 +1471,142 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<form
-			class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0"
-			action="#" method="get" role="form">
-			<input class="form-control" name="search" type="text"
-				placeholder="Search" aria-label="Search">
-		</form>
+		
+		<c:if test="${empty mvo}">
+			<div class="dropdown px-3">
+				<a class="nav-link dropdown-toggle" href="#" role="button"
+					data-bs-toggle="dropdown" aria-expanded="false"
+					style="width: 115px; font-style: italic">Login/Join</a>
 
-		<div class="navbar-nav me-lg-2">
-			<div class="nav-item text-nowrap d-flex align-items-center">
-				<div class="dropdown ps-3">
-					<a class="nav-link dropdown-toggle text-center" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false"
-						id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> <span
-						class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-							<span class="visually-hidden">New alerts</span>
-					</span>
-					</a>
-
-					<ul
-						class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow"
-						aria-labelledby="navbarLightDropdownMenuLink">
-						<small>Notifications</small>
-
-						<li class="notifications-block border-bottom pb-2 mb-2"><a
-							class="dropdown-item d-flex  align-items-center" href="#">
-								<div class="notifications-icon-wrap bg-success">
-									<i class="notifications-icon bi-check-circle-fill"></i>
-								</div>
-
-								<div>
-									<span>Your account has been created successfuly.</span>
-
-									<p>12 days ago</p>
-								</div>
-						</a></li>
-
-						<li class="notifications-block border-bottom pb-2 mb-2"><a
-							class="dropdown-item d-flex align-items-center" href="#">
-								<div class="notifications-icon-wrap bg-info">
-									<i class="notifications-icon bi-folder"></i>
-								</div>
-
-								<div>
-									<span>Please check. We have sent a Daily report.</span>
-
-									<p>10 days ago</p>
-								</div>
-						</a></li>
-
-						<li class="notifications-block"><a
-							class="dropdown-item d-flex align-items-center" href="#">
-								<div class="notifications-icon-wrap bg-danger">
-									<i class="notifications-icon bi-question-circle"></i>
-								</div>
-
-								<div>
-									<span>Account verification failed.</span>
-
-									<p>1 hour ago</p>
-								</div>
-						</a></li>
-					</ul>
-				</div>
-
-				<div class="dropdown px-3">
-					<a class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> <img
-						src="./resources/images/medium-shot-happy-man-smiling.jpg"
-						class="profile-image img-fluid" alt="">
-					</a>
-					<ul class="dropdown-menu bg-white shadow">
-						<li>
-							<div class="dropdown-menu-profile-thumb d-flex">
-								<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
-									class="profile-image img-fluid me-3" alt="">
-
-								<div class="d-flex flex-column">
-									<small>Thomas</small> <a href="#">thomas@site.com</a>
-								</div>
+				<ul class="dropdown-menu bg-white shadow show"
+					data-bs-popper="static">
+					<div style="margin: 0 10px 0 10px;">
+						<form id="lfrm" action="${cpath}/login.do" method="post">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" name="id" id="id"
+									placeholder="ID"
+									style="border-color: #A8DADC; border-style: solid;"><label
+									for="id">ID</label>
 							</div>
-						</li>
+							<div class="form-floating mb-3">
+								<input type="password" class=" form-control" name="pw" id="pw"
+									placeholder="Password"
+									style="border-color: #A8DADC; border-style: solid;"> <label
+									for="pw">Password</label>
+							</div>
+					</div>
+					<li class="border-top mt-3 pt-2"><button type="button"
+							class="dropdown-item ms-0 me-0" onclick="login()">
+							<i class="bi-box-arrow-right me-2"></i> 로그인
+						</button>
+						</form>
+						<button type="button" class="dropdown-item ms-0 me-0"
+							onclick="joinPage()">
+							<i class="bi-box-arrow-right me-2"></i> 회원가입
+						</button></li>
 
-						<li><a class="dropdown-item" href="profile.html"> <i
-								class="bi-person me-2"></i> Profile
-						</a></li>
+				</ul>
+			</div>
+		</c:if>
 
-						<li><a class="dropdown-item" href="setting.html"> <i
-								class="bi-gear me-2"></i> Settings
-						</a></li>
+		<!-- 회원 로그인바 -->
+		<c:if test="${!empty mvo}">
+			<div class="navbar-nav me-lg-2">
+				<div class="nav-item text-nowrap d-flex align-items-center">
+					<div class="dropdown ps-3">
+						<a class="nav-link dropdown-toggle text-center" href="#"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false"
+							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> <span
+							class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+								<span class="visually-hidden">New alerts</span>
+						</span>
+						</a>
 
-						<li><a class="dropdown-item" href="help-center.html"> <i
-								class="bi-question-circle me-2"></i> Help
-						</a></li>
+						<ul
+							class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow"
+							aria-labelledby="navbarLightDropdownMenuLink">
+							<small>Notifications</small>
 
-						<li class="border-top mt-3 pt-2 mx-4"><a
-							class="dropdown-item ms-0 me-0" href="#"> <i
-								class="bi-box-arrow-left me-2"></i> Logout
-						</a></li>
-					</ul>
+							<li class="notifications-block border-bottom pb-2 mb-2"><a
+								class="dropdown-item d-flex  align-items-center" href="#">
+									<div class="notifications-icon-wrap bg-success">
+										<i class="notifications-icon bi-check-circle-fill"></i>
+									</div>
+
+									<div>
+										<span>Your account has been created successfuly.</span>
+
+										<p>12 days ago</p>
+									</div>
+							</a></li>
+
+							<li class="notifications-block border-bottom pb-2 mb-2"><a
+								class="dropdown-item d-flex align-items-center" href="#">
+									<div class="notifications-icon-wrap bg-info">
+										<i class="notifications-icon bi-folder"></i>
+									</div>
+
+									<div>
+										<span>Please check. We have sent a Daily report.</span>
+
+										<p>10 days ago</p>
+									</div>
+							</a></li>
+
+							<li class="notifications-block"><a
+								class="dropdown-item d-flex align-items-center" href="#">
+									<div class="notifications-icon-wrap bg-danger">
+										<i class="notifications-icon bi-question-circle"></i>
+									</div>
+
+									<div>
+										<span>Account verification failed.</span>
+
+										<p>1 hour ago</p>
+									</div>
+							</a></li>
+						</ul>
+					</div>
+
+					<div class="dropdown px-3">
+						<a class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> <img
+							src="./resources/images/medium-shot-happy-man-smiling.jpg"
+							class="profile-image img-fluid" alt="">
+						</a>
+						<ul class="dropdown-menu bg-white shadow">
+							<li>
+								<div class="dropdown-menu-profile-thumb d-flex">
+									<img src="./resources/images/medium-shot-happy-man-smiling.jpg"
+										class="profile-image img-fluid me-3" alt="">
+
+									<div class="d-flex flex-column">
+										<small>Thomas</small> <a href="#">thomas@site.com</a>
+									</div>
+								</div>
+							</li>
+
+							<li><a class="dropdown-item" href="${cpath }/mypage.do">
+									<i class="bi-person me-2"></i> Profile
+							</a></li>
+
+							<li><a class="dropdown-item" href="setting.html"> <i
+									class="bi-gear me-2"></i> Settings
+							</a></li>
+
+							<li><a class="dropdown-item" href="help-center.html"> <i
+									class="bi-question-circle me-2"></i> Help
+							</a></li>
+
+							<li class="border-top mt-3 pt-2 mx-4"><a
+								class="dropdown-item ms-0 me-0" href="${cpath }/logout.do"> <i
+									class="bi-box-arrow-left me-2"></i> Logout
+							</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:if>
 	</header>
 
 	<div class="container-fluid">
@@ -1582,26 +1616,59 @@
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="index.html"> <i
+							aria-current="page" href="${cpath}/main.do"> <i
 								class="bi-house-fill me-2"></i> 메인
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="wallet.html">
+						<li class="nav-item"><a class="nav-link" href="${cpath }/circle_search.do">
 								<i class="bi-wallet me-2"></i> 동아리 찾기
 						</a></li>
-
-						<li class="nav-item"><a class="nav-link" href="profile.html">
-								<i class="bi-person me-2"></i> 모임 찾기
-						</a></li>
-
-						<li class="nav-item"><a class="nav-link" href="setting.html">
+						<c:if test="${!empty mvo}">
+						<li class="nav-item"><a class="nav-link" href="javascript:void(0);" onclick="my_circle()">
+								<i class="bi-person me-2"></i> 내 동아리</a>
+								<ul style="display: none" id="my_circle">
+									<li class="nav-item" style="list-style-type: none">
+									<a class="nav-link" href="${cpath}/myCircle.do?circle_at=${mvo.circle_at}">${mvo.circle_at}</a>
+									</li>
+								</ul>
+						</li>
+						</c:if>
+						<c:if test="${!empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="${cpath}/researchPage.do"> <i class="bi-person me-2"></i>
+									성향분석하기
+							</a></li>
+						</c:if>
+						<c:if test="${empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="javascript:void(0);" onclick="alert('로그인후 이용가능합니다');return false;"> <i class="bi-person me-2"></i>
+									성향분석하기
+							</a></li>
+						</c:if>
+						<c:if test="${!empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="${cpath}/make_profile.do"> <i class="bi-person me-2"></i>
+									동물 프로필 만들기
+							</a></li>
+						</c:if>
+						<c:if test="${empty mvo}">
+							<li class="nav-item"><a class="nav-link"
+								href="javascript:void(0);" onclick="alert('로그인후 이용가능합니다');return false;"> <i class="bi-person me-2"></i>
+									동물 프로필 만들기
+							</a></li>
+						</c:if>
+						<c:if test="${!empty mvo}">
+						<li class="nav-item"><a class="nav-link" href="${cpath }/myPage.do">
 								<i class="bi-gear me-2"></i> 내 정보
 						</a></li>
+						</c:if>
 
-						<li class="nav-item border-top mt-auto pt-2"><a
-							class="nav-link" href="#"> <i class="bi-box-arrow-left me-2"></i>
-								Logout
-						</a></li>
+						<c:if test="${!empty mvo}">
+							<li class="nav-item border-top mt-auto pt-2"><a
+								class="nav-link" href="${cpath}/logout.do"> <i
+									class="bi-box-arrow-left me-2"></i> Logout
+							</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</nav>
@@ -1616,9 +1683,7 @@
 					<div class="common_top_nav_header">
 						<div
 							style="display: flex; justify-content: center; align-items: center;">
-							<img onclick="goback()"
-								src=".\resources\images\angle_left_new.svg"
-								style="position: absolute; left: 0px;"> 게시글 상세
+							 게시글 상세
 
 						</div>
 					</div>
@@ -1630,28 +1695,13 @@
 								<div
 									style="display: flex; flex-direction: row; align-items: center; margin-bottom: 20px;">
 
-									<!--메인 홈 이동-->
-									<div onclick="show_loader();location.href='/web'"
-										class="top_icon_home fw400_12_14_3A"
-										style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 77.17px; height: 30px; background: #F5F5F5; border-radius: 10px; padding: 8px 10px; margin-right: 6px; white-space: nowrap;">
-										<img
-											src="http://mycampus-test.eba-jramfkx3.ap-northeast-2.elasticbeanstalk.com/s/front/images/icons/home.svg"
-											alt="home"
-											style="margin-right: 8px; width: 16px; height: 16px;">
-										메인 홈
-									</div>
-
+									
 									<!--동아리 홈 이동-->
 									<div
-										onclick="show_loader();location.href='/web/club/info/1655/405/3'"
+										onclick="show_loader();location.href='${cpath}/c_board.do'"
 										class="top_icon_home fw400_12_14_3A">동아리 홈</div>
 									<div style="display: flex;">
 
-										<!-- 활동 앨범  -->
-										<div
-											<div onclick="show_loader();location.href='/web/club/base_board/club_history/1655'" class="top_icon_home fw400_12_14_3A" 
-											style="width: fit-content;display: flex;flex-direction: row;justify-content: center;align-items: center;height: 30px;background: #F5F5F5;border-radius: 10px;padding: 8px 10px;margin-right: 6px;white-space: nowrap;">
-											활동 앨범</div></div>
 									</div>
 								</div>
 								<div>
@@ -1692,15 +1742,6 @@
 							</div>
 						</div>
 
-<%-- 						<div class="swiper-zoom-container">
-
-							<!-- <img
-								src="https://mycampus-storage.s3.ap-northeast-2.amazonaws.com/s/shared/temporary/2023/07/11/e8b0c1a6-4c38-4985-b96d-b80f68bb15d4.jpeg"
-								style="max-height: 400px; object-fit: contain;"> -->
-
-							<img alt="x" src="${detail_album.board_img}"
-								style="max-height: 400px; object-fit: contain;" />
-						</div> --%>
 
 						<div class="board" style="padding: 0 40px; margin-bottom: 40px;">
 							<div class="activity_info_content mb-5 mt-3"
@@ -1801,7 +1842,7 @@
 						</div>
 						<div>
 							<div class="total_div" style="flex-direction: row;">
-								<div class="reply_div" style="width: calc(100% - 60px);">
+								<div class="reply_div" style="width: calc(100% - 0px);">
 
 									<form action="${cpath}/c_reply.do" method="post">
 
@@ -1810,13 +1851,10 @@
 										<input type="hidden" name="r_group" value="${detail_text.board_seq}" />
 
 
-										<div class="reply_input_tbl">
-											<textarea placeholder=" 댓글을 입력해주세요." class="reply_input_box"
-												name="reply_content" id="comment"
-												style="height: 35px !important; resize: none; border: none;"></textarea>
-
-											<button type="submit" class="send_btn">등록</button>
-											<!-- <div class="send_btn">등록</div> -->
+										<div class="input-group">
+  											<span class="input-group-text">Reply</span>
+  											<textarea class="form-control" aria-label="With textarea"></textarea>
+  											<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
 										</div>
 
 									</form>
@@ -1831,6 +1869,18 @@
 				</div>
 			</main>
 		</div>
+		
+		
+		<script src="./resources/js/jquery.min.js"></script>
+	<script src="./resources/js/bootstrap.bundle.min.js"></script>
+	<script src="./resources/js/apexcharts.min.js"></script>
+	<script src="./resources/js/custom.js"></script>
+		<script type="text/javascript">
+			function show_loader(){
+				
+				
+			}
+		</script>
 		<script type="text/javascript">
 			function likeReply(boardNo, replyNo) {
 				if(confirm('이 댓글을 좋아요 하시겠습니까?')) {

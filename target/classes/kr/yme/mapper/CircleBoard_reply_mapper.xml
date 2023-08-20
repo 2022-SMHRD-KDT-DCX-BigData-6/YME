@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.CircleBoard_reply_mapper">
+	
+<!--  	<select  id="boardGet" parameterType="int" resultType="kr.yme.entity.Circle_board">
+		select * from Circle_board where board_seq=2
+	</select>  -->
+	
+ 	<select  id="boardGet" parameterType="int" resultType="kr.yme.entity.Circle_board">
+		select * from Circle_board where board_seq=#{board_seq}
+	</select> 
+	
+	<select id="selectADetail" resultType="kr.yme.entity.Circle">
+		select * from Circle where circle_seq = #{circle_seq}
+	</select>	
+	
+	<!-- 댓글 입력시 -->
+	<insert id="replyInsert" parameterType="kr.yme.entity.Circle_board_reply" >
+		insert into Circle_board_reply(id, reply_id, reply_content, r_group, r_seq )
+		values(#{id},#{reply_id}, #{reply_content}, #{r_group}, #{r_seq})
+	</insert>
+	
+ 	<!-- 좋아요 수 누적 -->
+<!--	<update id="replySeqUpdate" parameterType="kr.yme.entity.Circle_board_reply">
+		update Circle_board_reply set r_seq=r_group+1 where r_group=2 and r_seq>4
+	</update> -->
+	
+ 	<!-- 댓글 좋아요 -->
+	<update id="recommendReply" parameterType="int">
+		update Circle_board_reply set likes = likes+1  where reply_seq=#{reply_seq}
+	</update>
+	
+	
+ 	<!-- 댓글 삭제-->
+	<update id="removeReply" parameterType="int">
+		update Circle_board_reply set r_delete = 1  where reply_seq=#{reply_seq}
+	</update>
+	
+	<select id="getReplies" parameterType="kr.yme.entity.Circle_board_reply" resultType="kr.yme.entity.Circle_board_reply">
+			<!-- select * from Circle_board_reply where r_group = #{r_group} and r_delete=0; -->
+			SELECT cr.*, m.nick FROM Circle_board_reply cr JOIN Member m ON cr.id = m.id WHERE cr.r_group = #{board_seq} AND cr.r_delete = 0
+	</select>
+	
+	
+	
+</mapper>
+
+	
+
