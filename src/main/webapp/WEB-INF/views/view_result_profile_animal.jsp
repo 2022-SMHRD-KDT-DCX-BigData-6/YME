@@ -551,7 +551,7 @@
 
 				</div>
 				</c:if>
-					<div class="submit_btn" style="display: flex; position: relative;">
+					<div class="submit_btn" style="display: flex; position: relative; width: 77%; margin: 0 auto;">
 
 						<div class="footer_btn" onclick="replay()"
 							style="z-index: 101; bottom: 0; width: 100%; height: 60px; background: #ececec; color: #FFFFFF; text-align: center; font-weight: 500; font-size: 18px; line-height: 20px; letter-spacing: -0.02em; padding: 20px 0;">

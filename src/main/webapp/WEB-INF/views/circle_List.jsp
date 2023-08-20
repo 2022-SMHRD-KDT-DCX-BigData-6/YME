@@ -5,25 +5,24 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="cpath" value="${pageContext.request.contextPath}"/>
 
-<c:forEach var="vo" items="${list}" varStatus="status">
-
-								<div class="col-lg-4 col-md-6 col-12" >
+<c:forEach var="vo" items="${list}">
+				
+								<c:if test="${!empty vo}">
+								<div class="col-lg-3 col-md-3 col-12" >
 									<div class="job-thumb job-thumb-box">
 										<div class="job-image-box-wrap">
-											<a href="job-details.html"> <img
+											<a href="${cpath}/c_board.do?circle_seq=${vo.circle_seq}"> <img
 												src="./resources/images/circle_logos/${vo.circle_name}.png"
-												class="job-image img-fluid" style="width: 200px;height: 200px;" alt="">
+												class="job-image img-fluid" style="width: 200px;height: 200px" alt="">
 											</a>
 
 										</div>
 
 										<div class="job-body" style="padding-top: 10px;">
 
-											<div class="d-flex align-items-center">
 													<p class="mb-0"
 														style="white-space: nowrap; font-weight: 700; font-size: 17px;">${vo.circle_name}</p>
 
-											</div>
 
 											<div class="d-flex align-items-center">
 												<p class="job-location" style="font-size: 10px;">
@@ -42,5 +41,6 @@
 										</div>
 									</div>
 								</div>
+								</c:if>
 
 </c:forEach>   

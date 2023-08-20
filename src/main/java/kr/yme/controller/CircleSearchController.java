@@ -43,7 +43,6 @@ public class CircleSearchController {
 			String circle_name = value2;
 			c_vo.setCircle_name(circle_name);
 			list = mapper.c_circleSearch(c_vo);
-			System.out.println(list);
 		}
 		
 
@@ -52,7 +51,6 @@ public class CircleSearchController {
 	    /*
 		 * session.setAttribute("f_list", list); System.out.println(list);
 		 */
-	    System.out.println(list);
 	    return "circle_List";
 	}	
 	

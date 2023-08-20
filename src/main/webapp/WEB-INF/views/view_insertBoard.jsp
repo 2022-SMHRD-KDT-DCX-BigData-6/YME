@@ -367,7 +367,7 @@
 				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-10 px-md-4 border-start">
 				<div
 					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
-					style="padding: 0;">
+					style="width: 70%; margin: 0 auto">
 					<div class="common_top_nav_header"
 						style="text-align: center; padding: 15px; font-size: 18px; font-weight: 600; color: #565656; background: white; width: auto; z-index: 98; top: 55px; border-bottom: 1px solid rgba(0, 0, 0, 0.08);">
 						<div
@@ -377,7 +377,7 @@
 					</div>
 					<div class="page-content header-clear" style="height: auto;">
 						<div class="content bottom-0"
-							style="height: calc(100% - 60px); overflow: scroll; padding-top: 15px;">
+							style="height: calc(100% - 60px); padding-top: 15px;">
 
 							<div class="contact-form">
 

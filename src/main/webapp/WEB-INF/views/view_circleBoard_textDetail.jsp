@@ -1683,7 +1683,7 @@
 				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
 				<div
 					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
-					style="padding: 0;">
+					style="width: 70%; margin: 0 auto">
 
 					<!-- 게시글 상세보기 -->
 					<div class="common_top_nav_header">
@@ -1785,7 +1785,7 @@
 											</div>
 											<div class="reply_right_div">
 										<img alt="x" src="./resources/images/i_del.png" 
-													style="width: 30px; height: 30px;float: right; position: absolute; right: 30px;"
+													style="width: 30px; height: 30px;float: right; position: absolute; right: 60px;"
 													onclick="removeReply(${detail_text.board_seq}, ${reply.reply_seq})">
 												<div class="c_col_02" style="line-height: 1;">
 													<div id="reply_02_14266">
@@ -1845,7 +1845,7 @@
 										<input type="hidden" name="id" value="${detail_text.id}" />
 											<input type="hidden" name="reply_id" value="${mvo.id}"/>
 										<input type="hidden" name="r_group" value="${detail_text.board_seq}" />
-										<input type="hidden" name="circle_seq" value="${detail_album.circle_seq }">
+										<input type="hidden" name="circle_seq" value="${detail_text.circle_seq }">
 <div class="reply_input_tbl">
   <input type="text" class="form-control" placeholder="댓글 입력" aria-label="Recipient's username" name="reply_content" aria-describedby="button-addon2">
   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>

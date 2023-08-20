@@ -1681,7 +1681,7 @@
 				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
 				<div
 					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
-					style="padding: 0;">
+					style="width: 70%; margin: 0 auto">
 
 					<!-- 게시글 상세보기 -->
 					<div class="common_top_nav_header">
@@ -1794,28 +1794,28 @@
 												</div>
 												
 												<div class="reply_right_div">
-													<img alt="x" src="./resources/images/i_del.png" 
-													style="width: 30px; height: 30px;float: right; position: absolute; right: 30px;"
+																												<img alt="x" src="./resources/images/i_del.png" 
+													style="width: 30px; height: 30px;float: right; position: absolute; right: 60px;"
 													onclick="removeReply(${detail_album.board_seq}, ${reply.reply_seq})">
-													
 													<div class="c_col_02" style="line-height: 1;">
 														<div id="reply_02_14266">
+
 															<span class="rw"
 																style="display: flex; align-items: center;"> <span
 																class="fw600_13_16_3A"
-																onclick="show_loader();location.href='/web/user/26146'"
+							
 																style="display: flex; align-items: center; font-weight: 700;">${reply.nick}
 															</span>
 															</span> <span class="rc"
 																style="white-space: break-spaces; word-break: break-word; text-align: left;">${reply.reply_content}</span>
 														</div>
+														
+														
 													</div>
-											 		<div>
+											 		
 
-														<i class="fa fa-ellipsis-h reply_report" id="14266"
-															onclick="report_menu_option(this.id, 26146)"
-															style="float: right; color: #a0a0a0; transform: rotate(90deg); font-size: 12px;"></i>
-													</div>
+												
+													
 												</div>
 											</div>
 											<div class="reply_span_div">

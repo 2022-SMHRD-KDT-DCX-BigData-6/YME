@@ -310,7 +310,7 @@
 
 										</div>
 										<div class="col-lg-12 col-12">
-											<button type="submit" onclick="search_button" class="form-control">동아리 찾기</button>
+											<button type="submit" class="form-control">동아리 찾기</button>
 										</div>
 									</div>
 								</div>
@@ -321,19 +321,12 @@
 						<div
 							class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
 							style="padding-bottom: 0; width: 80%; margin: 0 auto; display: none;">
-							<div class="row align-items-center">
-
-
-								
+							<div class="row align-items-center" >
 										<!-- 추천 친구 리스트 삽입 위치 -->
-								<div class="row align-items-center" id="test">
-	
+								<div class="row align-items-center" style="max-width: 103%; width: 103%; min-width: 103%" id="test">
+									
 	
 								</div>
-
-
-
-
 
 							</div>
 
@@ -400,7 +393,6 @@
 										method: "POST",
 										data: {value1: schoolName},
 										success: function(result){
-										console.log(result);
 
 										$("#test").html(result);
 										
@@ -417,7 +409,6 @@
 										method: "POST",
 										data: {value2: clubName},
 										success: function(result){
-										console.log(result);
 
 										$("#test").html(result);
 										

@@ -282,7 +282,7 @@
 							enctype="multipart/form-data" id="uploadForm" name="image">
 				<div class="row my-4">
 					<div
-						class="custom-block custom-block-profile-front custom-block-profile bg-white">
+						class="custom-block custom-block-profile-front custom-block-profile bg-white" style="width: 70%; margin: 0 auto">
 						<div class="dropzone" id="dropzone" style="margin: 0 auto">
 							<p>사진 첨부</p>
 						</div>

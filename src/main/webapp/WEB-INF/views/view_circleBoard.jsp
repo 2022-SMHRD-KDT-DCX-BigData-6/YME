@@ -268,7 +268,7 @@
 			<main
 				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-10 px-md-4 border-start">
 				<div
-					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white">
+					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white" style="width: 85%; margin: 0 auto">
 
 					<!--동아리 배경 이미지 제외한 하얀색 배경(게시판 전까지)-->
 					<div
@@ -391,7 +391,7 @@
 					<!--동아리 게시판 모음-->
 					<!--게시판 제목-->
 					<div
-						class="custom-block custom-block-profile-front custom-block-profile text-center bg-white">
+						class="custom-block custom-block-profile-front custom-block-profile text-center bg-white" >
 						<div class="swiper-wrapper" id="swiper-wrapper-d2b8fee9b520e995"
 							aria-live="polite">
 
@@ -408,7 +408,7 @@
 							
 								<div class="swiper-slide" data-hash="1"
 									style="width: 840px; margin-right: 10px;" role="group"
-									aria-label="2 / 3">
+									aria-label="2 / 3" >
 									<c:if test="${mvo.circle_at ne circle_detail.circle_name}">
 										<div
 										style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 30px 20px;">
@@ -457,7 +457,7 @@
 													value="">
 													<input type="hidden" id="circle_seq" name ="circle_seq" value="">
 											<c:forEach var="vo" items="${circle_A_board}">
-												<div class="col">
+												<div class="col_custom">
 													<div class="square"
 														style="background-image: url('${vo.board_img}'); background-size: cover; background-position: center;"
 														onclick="showAlbum(this, ${vo.board_seq},${vo.circle_seq})">

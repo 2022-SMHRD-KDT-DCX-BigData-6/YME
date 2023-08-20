@@ -262,7 +262,7 @@
 					<div class="col-lg-5 col-12" style="width: 100%;">
 						<!-- 동물 선택 -->
 						<div
-							class="custom-block custom-block-profile-front custom-block-profile text-center bg-white">
+							class="custom-block custom-block-profile-front custom-block-profile text-center bg-white" style="width: 85%;margin: 0 auto">
 							<div class="title-group mb-3" style="text-align: left;">
 								<h1 class="h5 mb-0">내가 좋아하는 동물상 선택</h1>
 								<small class="text-muted" id="target_animal_text">맘에 드는 동물상 친구를을 골라 주세요!</small>
@@ -425,7 +425,7 @@
 						<!-- mbti 선택 -->
 						<div
 							class="custom-block custom-block-profile-front custom-block-profile text-center bg-white mbtiDiv"
-							style="display: none;">
+							style="display: none;width: 85%;margin: 0 auto"">
 							<div class="title-group mb-3" style="text-align: left;">
 								<h1 class="h5 mb-0">최고 궁합 MBTI</h1>
 								<small class="text-muted" id="target_mbti_text">${mvo.nick}님의 ${mvo.mbti}와 궁합이 가장 좋은 mbti를 추천해드립니다^^</small>
@@ -1211,7 +1211,7 @@
 					<div class="col-lg-5 col-12" style="width: 100%;">
 						<div
 							class="custom-block custom-block-profile-front custom-block-profile text-center bg-white friendDiv"
-							style="display: none;">
+							style="display: none;width: 85%;margin: 0 auto"">
 							
 							
 							<!-- 추천 친구 리스트 삽입 위치 -->
