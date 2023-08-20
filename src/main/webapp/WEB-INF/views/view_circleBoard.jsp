@@ -426,7 +426,7 @@
 													value="">
 													<input type="hidden" id="circle_seq" name ="circle_seq" value="">
 											<c:forEach var="vo" items="${circle_A_board}">
-												<div class="col-custom" >
+												<div class="col_custom" >
 													<div class="square"
 														style="background-image: url('${vo.board_img}'); background-size: cover; background-position: center;"
 														onclick="alert('동아리 회원이 아닙니다')">
