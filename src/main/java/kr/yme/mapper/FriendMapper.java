@@ -8,5 +8,7 @@ public interface FriendMapper {
 
 	// kyohoon
 	public void insert_Friend_info(Friend fvo);
+	public void insert_Friend_info_x(Friend fvo);
+	public Friend ox(Friend fvo);
 	
 }

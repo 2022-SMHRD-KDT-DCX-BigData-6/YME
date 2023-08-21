@@ -7,7 +7,7 @@
 <c:forEach var="vo" items="${list}" varStatus="status">
 								
 								<div class="col-lg-3 col-md-4 col-6">
-									<div class="job-thumb job-thumb-box friendCard" onclick="friendSelected(this)">
+									<div class="job-thumb job-thumb-box friendCard">
 										<div class="job-image-box-wrap">
 											
 											<c:if test="${vo.ani_name == '강아지'}">											
@@ -62,14 +62,23 @@
 													<i class="custom-icon bi-clock me-1"></i> ${vo.preference}
 												</p>
 											</div>
-
-											<div class="align-items-center friendMeet1" style="display: none;">
-												<a href="job-details.html" class="custom-btn btn"
-													style="width: 100%; margin-top: 5px; padding: 5px; border-radius: 7px;">프로필</a>
+											
+											<div class="align-items-center friendMeet1" style="display: block;"	 
+												 data-id="${vo.id}" 
+ 								    			 data-ani-name="${vo.ani_name}" 
+								     			 data-nick="${vo.nick}" 
+								     			 data-mbti="${vo.mbti}" 
+								     			 data-univ="${vo.univ}" 
+								     			 onclick="click_friend_add(this)">
+								     			 
+								     			 <button type="button" class="click_friend_add" style="width: 100%; background-color: #A8DADC;color: white; border:none; margin-top: 5px; padding: 5px; border-radius: 7px;">친구추가</button>
+								     			 
+												 
 											</div>
+
+											
 											<div class="align-items-center friendMeet2" style="display: none;">
-												<a href="job-details.html" class="custom-btn btn"
-													style="width: 100%; margin-top: 5px; padding: 5px; border-radius: 7px;">채팅</a>
+											<button type="button" style="width: 100%; background-color: #A8DADC;color: white; border:none; margin-top: 5px; padding: 5px; border-radius: 7px;">채팅</button>
 											</div>
 										</div>
 									</div>

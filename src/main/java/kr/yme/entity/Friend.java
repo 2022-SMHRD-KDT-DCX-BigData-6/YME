@@ -20,5 +20,6 @@ private String f_accept;
 private String f_ani_name;
 private String f_mbti;
 private Date f_at;
+private String f_univ;
 
 }

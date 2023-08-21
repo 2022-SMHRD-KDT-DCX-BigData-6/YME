@@ -7,4 +7,5 @@ import kr.yme.entity.M_character;
 @Mapper
 public interface M_characterMapper {
 	public M_character insertId(M_character cvo);
+	public String animalname(String id);
 }

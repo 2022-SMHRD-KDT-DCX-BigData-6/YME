@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.yme.mapper.FriendMapper">
+		<!-- kyohoon -->
+	<insert id="insert_Friend_info" parameterType="kr.yme.entity.Friend">
+		insert into Friend(id, f_univ, f_id, f_nick, f_send, f_ani_name, f_mbti) values(#{id}, #{f_univ}, #{f_id}, #{f_nick}, "O", #{f_ani_name}, #{f_mbti}) 
+	</insert>
+	<insert id="insert_Friend_info_x" parameterType="kr.yme.entity.Friend">
+		insert into Friend(id, f_univ, f_id, f_nick, f_accept, f_ani_name, f_mbti) values(#{id}, #{f_univ}, #{f_id}, #{f_nick}, "O", #{f_ani_name}, #{f_mbti}) 
+	</insert>	
+
+	<select id="ox" parameterType="kr.yme.entity.Friend" resultType="kr.yme.entity.Friend">
+		select * from Friend where id = #{id} and f_id=#{f_id}  order by f_at desc limit 1
+	</select>
+
+	
+
+
+</mapper>
+

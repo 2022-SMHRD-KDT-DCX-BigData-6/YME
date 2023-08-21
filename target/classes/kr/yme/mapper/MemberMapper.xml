@@ -13,7 +13,7 @@
 		select count(*) from Member where nick=#{nick}
 	</select>
 	<select id="searchFriend" parameterType="kr.yme.entity.Member" resultType="kr.yme.entity.Member">
-		select M_character.ani_name, Member.id, Member.nick, Member.preference
+		select *
 		from M_character, Member 
 		where M_character.id = Member.id
 		and M_character.ani_name = #{ani_name} and Member.mbti = #{mbti} and Member.univ = #{univ};

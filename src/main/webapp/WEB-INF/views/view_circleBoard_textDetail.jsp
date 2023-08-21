@@ -1516,56 +1516,10 @@
 					<div class="dropdown ps-3">
 						<a class="nav-link dropdown-toggle text-center" href="#"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false"
-							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> <span
-							class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> 
 								<span class="visually-hidden">New alerts</span>
-						</span>
 						</a>
 
-						<ul
-							class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow"
-							aria-labelledby="navbarLightDropdownMenuLink">
-							<small>Notifications</small>
-
-							<li class="notifications-block border-bottom pb-2 mb-2"><a
-								class="dropdown-item d-flex  align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-success">
-										<i class="notifications-icon bi-check-circle-fill"></i>
-									</div>
-
-									<div>
-										<span>Your account has been created successfuly.</span>
-
-										<p>12 days ago</p>
-									</div>
-							</a></li>
-
-							<li class="notifications-block border-bottom pb-2 mb-2"><a
-								class="dropdown-item d-flex align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-info">
-										<i class="notifications-icon bi-folder"></i>
-									</div>
-
-									<div>
-										<span>Please check. We have sent a Daily report.</span>
-
-										<p>10 days ago</p>
-									</div>
-							</a></li>
-
-							<li class="notifications-block"><a
-								class="dropdown-item d-flex align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-danger">
-										<i class="notifications-icon bi-question-circle"></i>
-									</div>
-
-									<div>
-										<span>Account verification failed.</span>
-
-										<p>1 hour ago</p>
-									</div>
-							</a></li>
-						</ul>
 					</div>
 
 				
@@ -1618,7 +1572,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<nav id="sidebarMenu"
-				class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
 				<div class="position-sticky py-4 px-3 sidebar-sticky">
 					<ul class="nav flex-column h-100">
 						<li class="nav-item"><a class="nav-link"
@@ -1680,7 +1634,7 @@
 			</nav>
 
 			<main
-				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+				class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-10 px-md-4 border-start">
 				<div
 					class="custom-block custom-block-profile-front custom-block-profile text-center bg-white"
 					style="width: 70%; margin: 0 auto">
@@ -1876,6 +1830,18 @@
 				
 			}
 		</script>
+		
+		<script type="text/javascript">
+	 function my_circle(){
+		 var con = document.getElementById("my_circle")
+		 if(con.style.display == "none"){
+		 $('#my_circle').css("display","block");
+			 
+		 }else{
+			 $('#my_circle').css("display","none");
+		 }
+	 }
+	</script>
 		<script type="text/javascript">
 			function likeReply(boardNo, replyNo) {
 				if(confirm('이 댓글을 좋아요 하시겠습니까?')) {

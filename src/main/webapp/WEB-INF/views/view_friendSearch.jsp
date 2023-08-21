@@ -92,56 +92,12 @@
 					<div class="dropdown ps-3">
 						<a class="nav-link dropdown-toggle text-center" href="#"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false"
-							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> <span
-							class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> 
 								<span class="visually-hidden">New alerts</span>
-						</span>
+					
 						</a>
 
-						<ul
-							class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow"
-							aria-labelledby="navbarLightDropdownMenuLink">
-							<small>Notifications</small>
-
-							<li class="notifications-block border-bottom pb-2 mb-2"><a
-								class="dropdown-item d-flex  align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-success">
-										<i class="notifications-icon bi-check-circle-fill"></i>
-									</div>
-
-									<div>
-										<span>Your account has been created successfuly.</span>
-
-										<p>12 days ago</p>
-									</div>
-							</a></li>
-
-							<li class="notifications-block border-bottom pb-2 mb-2"><a
-								class="dropdown-item d-flex align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-info">
-										<i class="notifications-icon bi-folder"></i>
-									</div>
-
-									<div>
-										<span>Please check. We have sent a Daily report.</span>
-
-										<p>10 days ago</p>
-									</div>
-							</a></li>
-
-							<li class="notifications-block"><a
-								class="dropdown-item d-flex align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-danger">
-										<i class="notifications-icon bi-question-circle"></i>
-									</div>
-
-									<div>
-										<span>Account verification failed.</span>
-
-										<p>1 hour ago</p>
-									</div>
-							</a></li>
-						</ul>
+						
 					</div>
 
 						<div class="dropdown px-3">
@@ -1215,11 +1171,13 @@
 							
 							
 							<!-- 추천 친구 리스트 삽입 위치 -->
+							<form action="">
 							<div class="row align-items-center" id="test">
 
 
 
 							</div>
+							</form>
 
 						
 						</div>
@@ -1322,7 +1280,6 @@
 				method: "POST",
 				data: {value1: select_mbti, value2: f_ani_name},
 				success: function(result){
-				console.log(result);
 
 				$("#test").html(result);
 				
@@ -1341,34 +1298,57 @@
 				div.style.display = '';
 			});
 			
+		/* 	 var f_id = element.getAttribute("data-id");
+	            $.ajax({
+	            	url:"${cpath}/friendbutton.do",
+	            	method: "POST",
+	            	data :{value: f_id},
+	            	success: function(result){
+	            		
+	            	}, error : function(){}
+	            });
+			 */
 		}
 	</script>
 	
-	<!-- friend 선택 -->
-	<script>
-        // 요소에 대한 클릭 이벤트 처리
-        function friendSelected(element) {
-            // Find the clicked friend card
-            var friendCard = element.closest('.friendCard');
-            
-            // Find the corresponding friendMeet element using index
-            var friendMeet1 = friendCard.querySelector('.friendMeet1');
-            
-            // Toggle the friendMeet's display between 'none' and 'flex'
-            if (friendMeet1) {
-                friendMeet1.style.display = (friendMeet1.style.display === 'none') ? 'flex' : 'none';
-            }
 
-            // Find the corresponding friendMeet element using index
-            var friendMeet2 = friendCard.querySelector('.friendMeet2');
-            
-            // Toggle the friendMeet's display between 'none' and 'flex'
-            if (friendMeet2) {
-                friendMeet2.style.display = (friendMeet2.style.display === 'none') ? 'flex' : 'none';
-            }
-        }
-    </script>
-<!--             var friendMeetDivs = friendCard.querySelectorAll('.friendMeet'); -->
+    
+    <script type="text/javascript">
+    function click_friend_add(element){
+        
+        var f_id = element.getAttribute("data-id");
+        var f_ani_name = element.getAttribute("data-ani-name");
+        var f_nick = element.getAttribute("data-nick");
+        var f_mbti = element.getAttribute("data-mbti");
+        var f_univ = element.getAttribute("data-univ");
+     	
+    	
+    	alert("버튼 눌림??");
+    	
+    	console.log(f_id);
+    	console.log(f_ani_name);
+    	console.log(f_nick);
+    	console.log(f_mbti);
+    	console.log(f_univ);
+    	$.ajax({
+    		url: "${cpath}/insertfriend.do",
+    		method: "POST",
+    		data : 
+    			 {value1: f_id,
+    		        value2: f_ani_name,
+    		        value3: f_nick,
+    		        value4: f_mbti,
+    		        value5: f_univ},  
+    		success: function(result){
+    			if(result == 1){
+    			$('button').attr('disabled', 'disabled').css("background-color","gray");
+    			}
+    			
+    		},
+    		error : function(){ }
+    	});
+	 }
+	</script>
 
 </body>
 <whale-quicksearch translate="no"></whale-quicksearch>

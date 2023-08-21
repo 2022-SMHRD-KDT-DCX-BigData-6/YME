@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.yme.mapper.M_characterMapper">
-	<insert id="insertId" parameterType="kr.yme.entity.M_character">
-		insert into M_character(id, ani_name) values(#{id}, "null")
-	</insert>
-	<select id="animalname" parameterType="kr.yme.entity.M_character" resultType="kr.yme.entity.M_character">
-		select ani_name from M_character where #{id}
+	<select id="animalname" parameterType="String" resultType="String">
+		select ani_name from M_character where id= #{id}
 	</select>
 </mapper>
 

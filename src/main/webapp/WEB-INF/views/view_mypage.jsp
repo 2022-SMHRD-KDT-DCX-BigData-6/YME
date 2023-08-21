@@ -172,56 +172,9 @@
 					<div class="dropdown ps-3">
 						<a class="nav-link dropdown-toggle text-center" href="#"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false"
-							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> <span
-							class="position-absolute start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+							id="navbarLightDropdownMenuLink"> <i class="bi-bell"></i> 
 								<span class="visually-hidden">New alerts</span>
-						</span>
 						</a>
-
-						<ul
-							class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow"
-							aria-labelledby="navbarLightDropdownMenuLink">
-							<small>Notifications</small>
-
-							<li class="notifications-block border-bottom pb-2 mb-2"><a
-								class="dropdown-item d-flex  align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-success">
-										<i class="notifications-icon bi-check-circle-fill"></i>
-									</div>
-
-									<div>
-										<span>Your account has been created successfuly.</span>
-
-										<p>12 days ago</p>
-									</div>
-							</a></li>
-
-							<li class="notifications-block border-bottom pb-2 mb-2"><a
-								class="dropdown-item d-flex align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-info">
-										<i class="notifications-icon bi-folder"></i>
-									</div>
-
-									<div>
-										<span>Please check. We have sent a Daily report.</span>
-
-										<p>10 days ago</p>
-									</div>
-							</a></li>
-
-							<li class="notifications-block"><a
-								class="dropdown-item d-flex align-items-center" href="#">
-									<div class="notifications-icon-wrap bg-danger">
-										<i class="notifications-icon bi-question-circle"></i>
-									</div>
-
-									<div>
-										<span>Account verification failed.</span>
-
-										<p>1 hour ago</p>
-									</div>
-							</a></li>
-						</ul>
 					</div>
 
 						<div class="dropdown px-3">
@@ -379,7 +332,7 @@
 
 								<div class="custom-block-bottom-item" style="width: 30%">
 									<div class="d-flex flex-column" style="align-items: center;">
-									<img class="iconImg modal-trigger" class="iconImg" src="./resources/images/icons/i_sns.png" style="" id="openChatBtn">
+									<img class="iconImg modal-trigger"  class="iconImg" src="./resources/images/icons/i_sns.png" id="openChatBtn">
 									 <small>채팅방</small>
 									</div>
 								</div>
@@ -388,7 +341,7 @@
 							<!-- 내 친구 목록 -->
 							<div class="myFriendDiv" style="display: none;">
 								<div class="title-group mb-3" style="text-align: left;">
-									<h1 class="h5 mb-0">친구 추가</h1>
+									<h1 class="h5 mb-0">친구 목록</h1>
 								</div>
 								<div class="row align-items-center">
 									<div class="col-lg-3 col-md-4 col-6">
@@ -424,7 +377,7 @@
 												</div>
 												<div class="align-items-center friendMeet2"
 													style="display: none;">
-													<a href="job-details.html" class="custom-btn btn"
+													<a href="job-details.html"  class="custom-btn btn"
 														style="width: 100%; margin-top: 5px; padding: 5px; border-radius: 7px;">채팅</a>
 												</div>
 											</div>
@@ -442,21 +395,23 @@
 					<div class="modal-content">
 						<table class="table table-bordered">
 							<tr>
-								<td><img alt="" src=".\resources\images\angle_left_new.svg"><input
-									type="text" name="user" id="user" class="form-control"
+								<td><input
+									type="text" name="user" id="user" value="${mvo.nick }" class="form-control"
 									placeholder="유저명"></td>
 								<td>
-									<button type="button" class="btn btn-default" id="btnConnect">채팅하기</button>
-									<button type="button" class="close btn btn-default"
+									<button type="button"id="btnConnect"  class="btn btn-default" >채팅하기</button>
+								</td>
+								<td>
+								 <button type="button" class="close btn btn-default"
 										id="btnDisconnect" disabled>종료</button>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><div id="list"
+								<td colspan="3"><div id="list"
 										style="height: 300px; padding: 15px; overflow: auto;"></div></td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="text" name="msg" id="msg"
+								<td colspan="3"><input type="text" name="msg" id="msg"
 									placeholder="대화 내용을 입력하세요." class="form-control" disabled></td>
 							</tr>
 						</table>
