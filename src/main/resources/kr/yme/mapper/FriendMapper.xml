@@ -13,7 +13,9 @@
 		select * from Friend where id = #{id} and f_id=#{f_id}  order by f_at desc limit 1
 	</select>
 
-	
+	<select id="search_friend" parameterType="kr.yme.entity.Friend" resultType="kr.yme.entity.Friend">
+		select * from Friend where id = #{id} and f_send = "O"
+	</select>		
 
 
 </mapper>

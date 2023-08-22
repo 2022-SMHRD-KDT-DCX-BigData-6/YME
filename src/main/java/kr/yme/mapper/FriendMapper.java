@@ -10,5 +10,5 @@ public interface FriendMapper {
 	public void insert_Friend_info(Friend fvo);
 	public void insert_Friend_info_x(Friend fvo);
 	public Friend ox(Friend fvo);
-	
+	public List<Friend> search_friend(Friend fvo);	
 }

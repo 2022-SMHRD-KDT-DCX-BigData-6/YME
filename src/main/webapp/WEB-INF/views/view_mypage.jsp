@@ -344,45 +344,12 @@
 									<h1 class="h5 mb-0">친구 목록</h1>
 								</div>
 								<div class="row align-items-center">
-									<div class="col-lg-3 col-md-4 col-6">
-										<div class="job-thumb job-thumb-box friendCard"
-											onclick="friendSelected(this)">
-											<div class="job-image-box-wrap">
-												<img
-													src=".\resources\images\profile\young-beautiful-woman-pink-warm-sweater.jpg"
-													class="job-image img-fluid" alt="">
-
-											</div>
-
-											<div class="job-body"
-												style="padding-top: 5px; padding: 20px;">
-
-												<div class="d-flex align-items-center">
-													<p class="mb-0"
-														style="white-space: nowrap; font-weight: 700; font-size: 17px;">닉네임</p>
-
-												</div>
-
-												<div class="d-flex align-items-center">
-
-													<p class="job-date" style="font-size: 10px;">
-														<i class="custom-icon bi-clock me-1"></i> 취향 태그
-													</p>
-												</div>
-
-												<div class="align-items-center friendMeet1"
-													style="display: none;">
-													<a href="job-details.html" class="custom-btn btn"
-														style="width: 100%; margin-top: 5px; padding: 5px; border-radius: 7px;">프로필</a>
-												</div>
-												<div class="align-items-center friendMeet2"
-													style="display: none;">
-													<a href="job-details.html"  class="custom-btn btn"
-														style="width: 100%; margin-top: 5px; padding: 5px; border-radius: 7px;">채팅</a>
-												</div>
-											</div>
-										</div>
-									</div>
+									
+								<!-- m_list 삽입위치 -->
+									<div class="row align-items-center" id="test">
+									
+									</div>	
+									
 									</div>
 								</div>
 							</div>
@@ -495,6 +462,15 @@
 				} else {
 					div.style.display = 'none';
 				}
+			});
+			$.ajax({
+				url: "${cpath}/myfriendselect.do",
+				method: "POST",
+				
+				success : function(result){
+					$("#test").html(result);
+				},
+				error: function(){}
 			});
 		}
 	</script>
@@ -685,5 +661,6 @@
 			}
 		}
 	</script>
+	
 </body>
 </html>

@@ -119,12 +119,9 @@
 			</div>
 		</div>
 	</header>
-
-	<form action="http://127.0.0.1/toResearch" method="get" id="frm">
+<form action="http://127.0.0.1/toResearch" method="get" id="frm">
 		<div class="swiper-container"
-			style="background: var(- -section-bg-color); min-height: calc(100vh - 65px);">
-			<div id="prevButton" class="swiper-button-prev"></div>
-			<div id="nextButton" class="swiper-button-next"></div>
+			style="background: #ececec; min-height: calc(100vh - 65px);">
 			<div class="swiper-wrapper" style="align-items: flex-start;">
 				<!-- 1 페이지 -->
 				<div class="swiper-slide">
@@ -483,6 +480,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="submit_btn" style="display: flex; position: relative;">
+							<div class="footer_btn 1_a_btn btn_title none" id="prevButton">이전</div>
+						</div>
 					</div>
 				</div>
 
@@ -664,6 +664,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="submit_btn" style="display: flex; position: relative;">
+							<div class="footer_btn 1_a_btn btn_title none" id="prevButton">이전</div>
+						</div>
 					</div>
 				</div>
 
@@ -842,6 +845,9 @@
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="submit_btn" style="display: flex; position: relative;">
+							<div class="footer_btn 1_a_btn btn_title none" id="prevButton">이전</div>
 						</div>
 					</div>
 				</div>
@@ -1022,6 +1028,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="submit_btn" style="display: flex; position: relative;">
+							<div class="footer_btn 1_a_btn btn_title none" id="prevButton">이전</div>
+						</div>
 					</div>
 				</div>
 
@@ -1054,7 +1063,7 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_1(this,'1')">
+												onclick="toggleSelected6_1(this,'1');  updateSubmitButton();">
 												매우<br>아니다
 											</div>
 
@@ -1062,19 +1071,19 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_1(this,'2')">아니다</div>
+												onclick="toggleSelected6_1(this,'2');  updateSubmitButton();">아니다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_1(this,'3')">그렇다</div>
+												onclick="toggleSelected6_1(this,'3');  updateSubmitButton();">그렇다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_1(this,'4')">
+												onclick="toggleSelected6_1(this,'4');  updateSubmitButton();">
 												매우<br>그렇다
 											</div>
 
@@ -1093,7 +1102,7 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_2(this,'1')">
+												onclick="toggleSelected6_2(this,'1');  updateSubmitButton();">
 												매우<br>아니다
 											</div>
 
@@ -1101,19 +1110,19 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_2(this,'2')">아니다</div>
+												onclick="toggleSelected6_2(this,'2');  updateSubmitButton();">아니다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_2(this,'3')">그렇다</div>
+												onclick="toggleSelected6_2(this,'3');  updateSubmitButton();">그렇다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_2(this,'4')">
+												onclick="toggleSelected6_2(this,'4');  updateSubmitButton();">
 												매우<br>그렇다
 											</div>
 
@@ -1132,7 +1141,7 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_3(this,'1')">
+												onclick="toggleSelected6_3(this,'1');  updateSubmitButton();">
 												매우<br>아니다
 											</div>
 
@@ -1140,19 +1149,19 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_3(this,'2')">아니다</div>
+												onclick="toggleSelected6_3(this,'2');  updateSubmitButton();">아니다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_3(this,'3')">그렇다</div>
+												onclick="toggleSelected6_3(this,'3');  updateSubmitButton();">그렇다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_3(this,'4')">
+												onclick="toggleSelected6_3(this,'4');  updateSubmitButton();">
 												매우<br>그렇다
 											</div>
 
@@ -1171,7 +1180,7 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_4(this,'1')">
+												onclick="toggleSelected6_4(this,'1');  updateSubmitButton();">
 												매우<br>아니다
 											</div>
 
@@ -1179,34 +1188,35 @@
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_4(this,'2')">아니다</div>
+												onclick="toggleSelected6_4(this,'2');  updateSubmitButton();">아니다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_4(this,'3')">그렇다</div>
+												onclick="toggleSelected6_4(this,'3');  updateSubmitButton();">그렇다</div>
 
 										</div>
 										<div class="option"
 											style="margin-right: 15px; margin-left: 15px;">
 											<div class="research-icon"
-												onclick="toggleSelected6_4(this,'4')">
+												onclick="toggleSelected6_4(this,'4');  updateSubmitButton();">
 												매우<br>그렇다
 											</div>
 
 										</div>
 									</div>
 								</div>
-								
+
 								<input type="hidden" name="id" id="id" value="${mvo.id}">
 								<input type="hidden" name="univ" id="univ" value="${mvo.univ}">
 								<input type="hidden" name="update" id="update" value="${update}">
 							</div>
 						</div>
 						<div class="submit_btn" style="display: flex; position: relative;">
-							<div class="footer_btn 1_a_btn btn_title none" id="nextButton"
-								onclick="research()">제출</div>
+							<div class="footer_btn 1_a_btn btn_title none" id="prevButton">이전</div>
+							<div class="footer_btn 1_a_btn btn_title none" id="submitButton"
+								onclick="research()" style="background-color: #A8DADC;">제출</div>
 						</div>
 					</div>
 				</div>
@@ -1224,11 +1234,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 	<!-- 스와이프 스크립 -->
-	<script>
+		<script>
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 1,
 			spaceBetween : 10,
 			allowTouchMove : false,
+			speed : 1000,
 			navigation : {
 				nextEl : '#nextButton',
 				prevEl : '#prevButton',
@@ -1905,7 +1916,7 @@
 				});
 
 				if (allQuestionsAnswered) {
-				
+
 					swiper.slideNext();
 
 					window.scrollTo(0, 0);
@@ -1999,5 +2010,6 @@
 			document.getElementById('frm').submit();
 		}
 	</script>
+
 </body>
 </html>

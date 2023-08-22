@@ -110,8 +110,10 @@
 				<div class="nav-item text-nowrap d-flex align-items-center">
 					<div class="dropdown ps-3">
 						<a class="nav-link dropdown-toggle text-center" href="#"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi-bell"></i>
 								<span class="visually-hidden">New alerts</span>
+							
 						</a>
 
 					</div>

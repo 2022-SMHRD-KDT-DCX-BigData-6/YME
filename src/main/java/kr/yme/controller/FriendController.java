@@ -1,5 +1,7 @@
 package kr.yme.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -67,5 +69,17 @@ public class FriendController {
 		
 		return 1;
 	}
-	
+
+	@RequestMapping("/myfriendselect.do")
+	public String myfriendselect(HttpSession session, Member member, Friend fvo, Model model) {
+		Member mvo = (Member) session.getAttribute("mvo");
+		String id = mvo.getId();
+		System.out.println(id);
+		fvo.setId(id);
+		List<Friend> list = fmapper.search_friend(fvo);
+		model.addAttribute("list",list);
+		
+	return "m_list";
+	}
+		
 }

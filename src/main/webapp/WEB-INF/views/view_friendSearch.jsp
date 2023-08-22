@@ -1298,16 +1298,7 @@
 				div.style.display = '';
 			});
 			
-		/* 	 var f_id = element.getAttribute("data-id");
-	            $.ajax({
-	            	url:"${cpath}/friendbutton.do",
-	            	method: "POST",
-	            	data :{value: f_id},
-	            	success: function(result){
-	            		
-	            	}, error : function(){}
-	            });
-			 */
+		
 		}
 	</script>
 	
@@ -1323,7 +1314,7 @@
         var f_univ = element.getAttribute("data-univ");
      	
     	
-    	alert("버튼 눌림??");
+    	alert("친구추가를 보냈습니다!");
     	
     	console.log(f_id);
     	console.log(f_ani_name);
