@@ -1,0 +1,243 @@
+use Min;
+
+
+CREATE TABLE Member
+(
+    id          VARCHAR(30)    NOT NULL    COMMENT '아이디', 
+    pw          VARCHAR(30)    NOT NULL    COMMENT '비밀번호',
+    name        VARCHAR(30)    NOT NULL COMMENT '회원이름',
+    nick        VARCHAR(40)    NOT NULL    COMMENT '별명',
+    phone       VARCHAR(25)    NOT NULL    COMMENT '전화번호', 
+    univ        VARCHAR(30)    NOT NULL    COMMENT '소속 대학교', 
+    circle_at   VARCHAR(30)    NOT NULL    COMMENT '소속 동아리', 
+    preference  TEXT           NOT NULL    COMMENT '성향분석태그', 
+    region      VARCHAR(50)    NOT NULL    COMMENT '지역', 
+    mbti        VARCHAR(20)    NOT NULL    COMMENT 'MBTI', 
+    birthdate   DATE           NOT NULL    COMMENT '생년월일', 
+    created_at  DATETIME       NOT NULL    COMMENT '가입일자', 
+     PRIMARY KEY (id)
+);
+
+alter table Member modify column circle_at varchar(30); 
+
+ALTER TABLE Member ADD name varchar(20) NOT NULL COMMENT '이름';
+ALTER TABLE Tendency ADD q1 int NOT NULL COMMENT '문제1';
+ALTER TABLE Tendency ADD q2 int NOT NULL COMMENT '문제2';
+ALTER TABLE Tendency ADD q3 int NOT NULL COMMENT '문제3';
+ALTER TABLE Tendency ADD q4 int NOT NULL COMMENT '문제4';
+ALTER TABLE Tendency ADD q5 int NOT NULL COMMENT '문제5';
+ALTER TABLE Tendency ADD q6 int NOT NULL COMMENT '문제6';
+ALTER TABLE Tendency ADD q7 int NOT NULL COMMENT '문제7';
+ALTER TABLE Tendency ADD q8 int NOT NULL COMMENT '문제8';
+ALTER TABLE Tendency ADD q9 int NOT NULL COMMENT '문제9';
+ALTER TABLE Tendency ADD q10 int NOT NULL COMMENT '문제10';
+ALTER TABLE Tendency ADD q11 int NOT NULL COMMENT '문제11';
+ALTER TABLE Tendency ADD q12 int NOT NULL COMMENT '문제12';
+ALTER TABLE Tendency ADD q13 int NOT NULL COMMENT '문제13';
+ALTER TABLE Tendency ADD q14 int NOT NULL COMMENT '문제14';
+ALTER TABLE Tendency ADD q15 int NOT NULL COMMENT '문제15';
+ALTER TABLE Tendency ADD q16 int NOT NULL COMMENT '문제16';
+ALTER TABLE Tendency ADD q17 int NOT NULL COMMENT '문제17';
+ALTER TABLE Tendency ADD q18 int NOT NULL COMMENT '문제18';
+ALTER TABLE Tendency ADD q19 int NOT NULL COMMENT '문제19';
+ALTER TABLE Tendency ADD q20 int NOT NULL COMMENT '문제20';
+ALTER TABLE Tendency ADD q21 int NOT NULL COMMENT '문제21';
+ALTER TABLE Tendency ADD q22 int NOT NULL COMMENT '문제22';
+ALTER TABLE Tendency ADD q23 int NOT NULL COMMENT '문제23';
+ALTER TABLE Tendency ADD q24 int NOT NULL COMMENT '문제24';
+ALTER TABLE Circle_board ADD likes int default 0 NOT NULL COMMENT '좋아요';
+ALTER TABLE Circle_board_reply ADD likes CHAR(1) default 'N' NOT NULL COMMENT '답글좋아요';
+
+ALTER TABLE Member COMMENT '회원';
+CREATE TABLE Circle
+(
+    circle_seq       INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '동아리 순번', 
+    circle_name      VARCHAR(60)     NOT NULL    COMMENT '동아리 명', 
+    circle_logo      VARCHAR(600)    NOT NULL    COMMENT '동아리 로고', 
+    circle_univ      VARCHAR(60)     NOT NULL    COMMENT '소속 대학교', 
+    circle_at        DATE            NOT NULL    COMMENT '개설일자', 
+    circle_category  VARCHAR(30)     NOT NULL    COMMENT '동아리 카테고리', 
+    id               VARCHAR(30)     NOT NULL    COMMENT '개설자 아이디', 
+    circle_intro     VARCHAR(500)    NULL        COMMENT '동아리 소개', 
+    circle_main      CHAR(1)         NOT NULL    COMMENT '중앙동아리 여부', 
+     PRIMARY KEY (circle_seq)
+);
+
+
+-- 테이블 Comment 설정 SQL - circle
+ALTER TABLE Circle COMMENT '동아리';
+CREATE TABLE Circle_join
+(
+    join_seq    INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '가입 순번', 
+    circle_seq  INT UNSIGNED    NOT NULL    COMMENT '동아리 순번', 
+    id          VARCHAR(30)     NOT NULL    COMMENT '회원아이디', 
+    joined_at   DATETIME        NOT NULL    COMMENT '가입일자', 
+     PRIMARY KEY (join_seq)
+);
+
+
+
+-- 테이블 Comment 설정 SQL - circle_join
+ALTER TABLE Circle_join COMMENT '동아리 가입';
+
+-- Foreign Key 설정 SQL - circle_join(circle_seq) -> circle(circle_seq)
+ALTER TABLE Circle_join
+    ADD CONSTRAINT FK_Circle_join_circle_seq_circle_circle_seq FOREIGN KEY (circle_seq)
+        REFERENCES Circle (circle_seq) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - circle_join(circle_seq)
+-- ALTER TABLE circle_join
+-- DROP FOREIGN KEY FK_circle_join_circle_seq_circle_circle_seq;
+
+-- Foreign Key 설정 SQL - circle_join(id) -> Member(id)
+ALTER TABLE Circle_join
+    ADD CONSTRAINT FK_Circle_join_id_Member_id FOREIGN KEY (id)
+        REFERENCES Member (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - circle_join(id)
+-- ALTER TABLE circle_join
+-- DROP FOREIGN KEY FK_circle_join_id_Member_id;
+
+CREATE TABLE Tendency
+(
+    tendency_seq  INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '분석순번', 
+    id            VARCHAR(30)     NOT NULL unique   COMMENT '회원아이디', 
+    tendency_1    TEXT            NOT NULL    COMMENT '회원성향1',
+    tendency_2    TEXT            NOT NULL    COMMENT '회원성향2',
+    tendency_3    TEXT            NOT NULL    COMMENT '회원성향3',
+    univ          varchar(20)     NOT NULL    COMMENT '대학코드',
+     PRIMARY KEY (tendency_seq)
+);
+
+-- 테이블 Comment 설정 SQL - Tendency
+ALTER TABLE Tendency COMMENT '성향 분석';
+
+-- Foreign Key 설정 SQL - Tendency(id) -> Member(id)
+ALTER TABLE Tendency
+    ADD CONSTRAINT FK_Tendency_id_Member_id FOREIGN KEY (id)
+        REFERENCES Member (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - Tendency(id)
+-- ALTER TABLE Tendency
+-- DROP FOREIGN KEY FK_Tendency_id_Member_id;
+
+CREATE TABLE Circle_board
+(
+    board_seq      INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '게시글 순번', 
+    circle_seq     INT UNSIGNED     NOT NULL    COMMENT '동아리 순번', 
+    id             VARCHAR(30)      NOT NULL    COMMENT '게시글 작성자', 
+    board_title    VARCHAR(100)     NOT NULL    COMMENT '게시글 제목', 
+    board_content  TEXT             NOT NULL    COMMENT '게시글 내용', 
+    count          int     default 0         NOT NULL    COMMENT '조회수', 
+    board_img      VARCHAR(2000)    NULL        COMMENT '이미지 파일', 
+    board_type     CHAR(1)          NOT NULL    COMMENT '게시판 종류',
+    board_at       DATETIME    default now()       NOT NULL    COMMENT '답글 작성시간',
+     PRIMARY KEY (board_seq)
+);
+
+commit;
+-- 테이블 Comment 설정 SQL - Circle_board
+ALTER TABLE Circle_board COMMENT '동아리 상세 게시판';
+
+-- Foreign Key 설정 SQL - Circle_board(circle_seq) -> circle(circle_seq)
+ALTER TABLE Circle_board
+    ADD CONSTRAINT FK_Circle_board_circle_seq_circle_circle_seq FOREIGN KEY (circle_seq)
+        REFERENCES Circle (circle_seq) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - Circle_board(circle_seq)
+-- ALTER TABLE Circle_board
+-- DROP FOREIGN KEY FK_Circle_board_circle_seq_circle_circle_seq;
+
+CREATE TABLE Circle_board_reply
+(
+    reply_seq      INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '답글 순번', 
+    id             VARCHAR(30)     NOT NULL    COMMENT '게시글 작성자', 
+    reply_id       VARCHAR(30)     NOT NULL    COMMENT '답글 작성자', 
+    
+    reply_content  TEXT            NOT NULL    COMMENT '답글 내용', 
+    likes          INT      default 0       NOT NULL    COMMENT '조회수', 
+    r_group        INT             NOT NULL    COMMENT '답글 그룹', 
+    r_seq          INT             NOT NULL default 0    COMMENT '답글 순서',
+    r_delete       INT             NOT NULL default 0    COMMENT '답글 삭제', 
+    reply_at       DATETIME    default now()       NOT NULL    COMMENT '답글 작성시간', 
+     PRIMARY KEY (reply_seq)
+);
+
+
+CREATE TABLE M_character
+(
+    profile_seq  INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '프로필 순번', 
+    id           VARCHAR(30)     NULL        COMMENT '아이디', 
+    ani_name     VARCHAR(30)     NULL        COMMENT '동물', 
+    profile_at   DATETIME        NULL        COMMENT '프로필 생성날짜', 
+     PRIMARY KEY (profile_seq)
+);
+
+
+-- 테이블 Comment 설정 SQL - M_character
+ALTER TABLE M_character COMMENT '프로필 사진 캐릭';
+
+-- Foreign Key 설정 SQL - M_character(id) -> Member(id)
+ALTER TABLE M_character
+    ADD CONSTRAINT FK_M_character_id_Member_id FOREIGN KEY (id)
+        REFERENCES Member (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+commit;
+-- Foreign Key 삭제 SQL - M_character(id)
+-- ALTER TABLE M_character
+-- DROP FOREIGN KEY FK_M_character_id_Member_id
+
+Drop table Circle_board_reply;
+-- 테이블 Comment 설정 SQL - Circle_board_reply
+ALTER TABLE Circle_board_reply COMMENT '동아리 게시판 답글';
+
+-- Foreign Key 설정 SQL - Circle_board_reply(id) -> Circle_board(id
+
+-- 테이블 생성 SQL - Chatroom
+CREATE TABLE Chatroom
+(
+    room_seq     INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '방 순번', 
+    room_opener  VARCHAR(30)     NOT NULL    COMMENT '방 개설자', 
+    room_title   VARCHAR(600)    NOT NULL    COMMENT '방 제목', 
+    room_desc    TEXT            NOT NULL    COMMENT '방 소개', 
+    room_limit   INT             NOT NULL    COMMENT '방 인원수', 
+    room_status  CHAR(1)         NOT NULL    COMMENT '방 상태', 
+    room_at      DATETIME  default now()      NOT NULL    COMMENT '방 개설일자', 
+     PRIMARY KEY (room_seq)
+);
+
+-- 테이블 Comment 설정 SQL - Chatroom
+ALTER TABLE Chatroom COMMENT '친구 채팅방';
+
+
+-- 테이블 생성 SQL - Chat_talk
+CREATE TABLE Chat_talk
+(
+    talk_seq  INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '채팅 순번', 
+    talker    VARCHAR(30)     NOT NULL    COMMENT '발화자', 
+    talk      TEXT            NULL        COMMENT '발화내용', 
+    emoticon  VARCHAR(600)    NULL        COMMENT '이모티콘', 
+    talk_at   DATETIME  default now()      NOT NULL    COMMENT '발화시간', 
+    room_seq  INT UNSIGNED    NOT NULL    COMMENT '방 순번', 
+     PRIMARY KEY (talk_seq)
+);
+
+-- 테이블 Comment 설정 SQL - Chat_talk
+ALTER TABLE Chat_talk COMMENT '친구 채팅내용';
+
+-- Foreign Key 설정 SQL - Chat_talk(room_seq) -> Chatroom(room_seq)
+ALTER TABLE Chat_talk
+    ADD CONSTRAINT FK_Chat_talk_room_seq_Chatroom_room_seq FOREIGN KEY (room_seq)
+        REFERENCES Chatroom (room_seq) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - Chat_talk(room_seq)
+-- ALTER TABLE Chat_talk
+-- DROP FOREIGN KEY FK_Chat_talk_room_seq_Chatroom_room_seq;
+
+
+create table Univ_region (
+  univ int not null unique comment '대학코드',
+  u_name varchar(100) not null comment '대학이름',
+  region int not null comment '지역코드',
+  r_name varchar(100) not null comment '지역이름'
+  
+ );
